@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabiryntBackend", "LabiryntBackend\LabiryntBackend.csproj", "{8A32CD36-3C90-468D-9431-12D1AB40294F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabiryntFrontend", "LabiryntFrontend\LabiryntFrontend.csproj", "{0E6AE261-E687-4076-A25E-71DF6EDDEEF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A32CD36-3C90-468D-9431-12D1AB40294F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A32CD36-3C90-468D-9431-12D1AB40294F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A32CD36-3C90-468D-9431-12D1AB40294F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A32CD36-3C90-468D-9431-12D1AB40294F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E6AE261-E687-4076-A25E-71DF6EDDEEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E6AE261-E687-4076-A25E-71DF6EDDEEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E6AE261-E687-4076-A25E-71DF6EDDEEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E6AE261-E687-4076-A25E-71DF6EDDEEF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1ED1F7AD-DBFD-4573-9466-D068785328A4}
+	EndGlobalSection
+EndGlobal
