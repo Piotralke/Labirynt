@@ -15,13 +15,6 @@ namespace LabiryntBackend.Models
         }
 
         public virtual DbSet<User> Users { get; set; } = null!;
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if(!optionsBuilder.IsConfigured)
-        //    {
-        //        throw new Exception();
-        //    }
-        //}
+        public virtual DbSet<Maze> Mazes { get; set; } = null!;
     }
 }

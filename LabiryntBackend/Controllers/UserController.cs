@@ -1,5 +1,6 @@
 ﻿using LabiryntBackend.Models;
 using Microsoft.AspNetCore.Mvc;
+using SimpleHashing.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,36 +16,49 @@ namespace LabiryntBackend.Controllers
         {
             _context = context;
         }
-        // GET: api/<UserController>
+
         [HttpGet]
         public IEnumerable<User> Get()
         {
             return _context.Users.ToArray();
         }
 
-        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public User Get(long id)
         {
-            return "value";
+            return _context.Users.Find(id);
         }
 
-        // POST api/<UserController>
+        [HttpGet("Login/{login}/{password}")]
+        public bool Login(string login, string password)
+        {
+            var user = _context.Users.Where(u=>u.login.Equals(login)).FirstOrDefault();
+            if (user != null)
+            {
+                ISimpleHash simpleHash = new SimpleHash();
+                bool isPasswordValid = simpleHash.Verify(password, user.password);
+                if(isPasswordValid)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] User user)
         {
+            ISimpleHash simpleHash = new SimpleHash();
+            user.password = simpleHash.Compute(user.password);
+            _context.Add(user);
+            _context.SaveChanges();
         }
 
-        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(long id, [FromBody] User user)
         {
         }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
