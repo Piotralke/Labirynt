@@ -32,7 +32,7 @@ namespace LabiryntFrontend
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            dataSetter <User> dataSetter = new dataSetter<User>();
+            dataSetter<User> dataSetter = new dataSetter<User>();
             User user = new User(loginRegisterInput.Text, passwordRegisterInput.Text);
             var result = dataSetter.postContent("User", user);
             loginRegisterInput.Clear();
@@ -46,20 +46,21 @@ namespace LabiryntFrontend
             credentials.Add(loginInput.Text);
             credentials.Add(passwordInput.Text);
             string isValid = dataGetter.getContent("User/Login", credentials);
-            if(isValid == "true")
+            if (isValid == "true")
             {
                 loginInput.Clear();
                 passwordInput.Clear();
-                panelList[1].BringToFront();
-               
-                
+                GbMaze gbMaze = new GbMaze();
+                this.Hide();
+                gbMaze.Show();
+
             }
-            
+
         }
 
         private void passwordRegisterInput_TextChanged(object sender, EventArgs e)
         {
-            if (passwordRegisterInput.Text != "" || passwordConfirmInput.Text !="")
+            if (passwordRegisterInput.Text != "" || passwordConfirmInput.Text != "")
             {
                 if (passwordRegisterInput.Text == passwordConfirmInput.Text)
                 {
@@ -70,9 +71,9 @@ namespace LabiryntFrontend
                     registerButton.Enabled = false;
                 }
             }
-            
+
         }
 
-        
+
     }
 }
