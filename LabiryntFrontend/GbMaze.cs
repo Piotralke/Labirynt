@@ -18,12 +18,12 @@ namespace LabiryntFrontend
         private const int rows = 10; // ilość wierszy
         private const int cols = 20; // ilość kolumn
 
-        private int[,] grid = new int[rows, cols]; // tablica dwuwymiarowa przechowująca wartości komórek
+        private bool[,] grid = new bool[rows, cols]; // tablica dwuwymiarowa przechowująca wartości komórek
 
         private bool isDrawing = false; // zmienna logiczna określająca, czy użytkownik aktualnie rysuje
         private int currentRow = -1; // numer wiersza aktualnie rysowanej komórki
         private int currentCol = -1; // numer kolumny aktualnie rysowanej komórki
-
+        private bool isWall = true;
         public GbMaze()
         {
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace LabiryntFrontend
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    if (grid[i, j] == 1)
+                    if (grid[i, j] == true)
                     {
                         brush = new SolidBrush(Color.Black);
                     }
@@ -76,7 +76,10 @@ namespace LabiryntFrontend
                 isDrawing = true;
                 currentRow = row;
                 currentCol = col;
-                grid[row, col] = 1 - grid[row, col]; // zamiana wartości między 0 i 1
+                if (row >= 0 && row < rows && col >= 0 && col < cols)
+                {
+                    grid[row, col] = isWall;
+                }
                 pictureBox1.Invalidate(); // odświeżenie kontrolki
             }
         }
@@ -100,11 +103,21 @@ namespace LabiryntFrontend
                     currentCol = col;
                     if (row >= 0 && row < rows && col >= 0 && col < cols)
                     {
-                        grid[row, col] = 1 - grid[row, col];
+                        grid[row, col] = isWall;
                     }
                     pictureBox1.Invalidate(); // odświeżenie kontrolki
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            isWall = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            isWall = false;
         }
     }
 }

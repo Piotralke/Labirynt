@@ -118,6 +118,7 @@
             button2.TabIndex = 0;
             button2.Text = "Usuń";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -128,6 +129,7 @@
             button1.TabIndex = 0;
             button1.Text = "Dodaj";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button3
             // 
