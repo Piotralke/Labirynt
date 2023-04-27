@@ -161,6 +161,7 @@
             // 
             // panelEditor
             // 
+            panelEditor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelEditor.BackColor = Color.Transparent;
             panelEditor.Controls.Add(pictureBox1);
             panelEditor.Location = new Point(206, 93);
@@ -170,10 +171,12 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Location = new Point(24, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(1000, 550);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             pictureBox1.Paint += pictureBox1_Paint;

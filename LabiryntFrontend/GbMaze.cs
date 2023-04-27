@@ -15,8 +15,8 @@ namespace LabiryntFrontend
     {
 
         private const int cellSize = 10; // rozmiar pojedynczej komórki
-        private const int rows = 55; // ilość wierszy
-        private const int cols = 100; // ilość kolumn
+        private const int rows = 10; // ilość wierszy
+        private const int cols = 20; // ilość kolumn
 
         private int[,] grid = new int[rows, cols]; // tablica dwuwymiarowa przechowująca wartości komórek
 
