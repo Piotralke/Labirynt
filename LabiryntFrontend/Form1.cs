@@ -51,6 +51,8 @@ namespace LabiryntFrontend
                 loginInput.Clear();
                 passwordInput.Clear();
                 panelList[1].BringToFront();
+               
+                
             }
             
         }
@@ -70,5 +72,7 @@ namespace LabiryntFrontend
             }
             
         }
+
+        
     }
 }
