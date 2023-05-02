@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LabiryntBackend.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,10 +16,10 @@ namespace LabiryntFrontend
     {
 
         private const int cellSize = 10; // rozmiar pojedynczej komórki
-        private const int rows = 10; // ilość wierszy
-        private const int cols = 20; // ilość kolumn
+        private int rows = 10; // ilość wierszy
+        private int cols = 10; // ilość kolumn
 
-        private bool[,] grid = new bool[rows, cols]; // tablica dwuwymiarowa przechowująca wartości komórek
+        private bool[,] grid = new bool[10, 10]; // tablica dwuwymiarowa przechowująca wartości komórek
 
         private bool isDrawing = false; // zmienna logiczna określająca, czy użytkownik aktualnie rysuje
         private int currentRow = -1; // numer wiersza aktualnie rysowanej komórki
@@ -27,7 +28,7 @@ namespace LabiryntFrontend
         public GbMaze()
         {
             InitializeComponent();
-
+            button3.Enabled = false;
             pictureBox1.Height = rows * cellSize;
             pictureBox1.Width = cols * cellSize;
         }
@@ -41,30 +42,30 @@ namespace LabiryntFrontend
             Pen pen = new Pen(Color.Black, 1);
             for (int i = 0; i <= rows; i++)
             {
-                g.DrawLine(pen, 0, i * cellSize, cols * cellSize, i * cellSize);
+                g.DrawLine(pen, 0, i * cellSize, rows * cellSize, i * cellSize);
             }
             for (int j = 0; j <= cols; j++)
             {
-                g.DrawLine(pen, j * cellSize, 0, j * cellSize, rows * cellSize);
+                g.DrawLine(pen, j * cellSize, 0, j * cellSize, cols * cellSize);
             }
 
-            // Rysowanie komórek
-            Brush brush = new SolidBrush(Color.White);
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    if (grid[i, j] == true)
-                    {
-                        brush = new SolidBrush(Color.Black);
-                    }
-                    else
-                    {
-                        brush = new SolidBrush(Color.White);
-                    }
-                    g.FillRectangle(brush, j * cellSize, i * cellSize, cellSize, cellSize);
-                }
-            }
+            //// Rysowanie komórek
+            //Brush brush = new SolidBrush(Color.White);
+            //for (int i = 0; i < rows; i++)
+            //{
+            //    for (int j = 0; j < cols; j++)
+            //    {
+            //        if (grid[i, j] == true)
+            //        {
+            //            brush = new SolidBrush(Color.Black);
+            //        }
+            //        else
+            //        {
+            //            brush = new SolidBrush(Color.White);
+            //        }
+            //        g.FillRectangle(brush, j * cellSize, i * cellSize, cellSize, cellSize);
+            //    }
+            //}
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -118,6 +119,170 @@ namespace LabiryntFrontend
         private void button2_Click(object sender, EventArgs e)
         {
             isWall = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    grid[i, j] = true;
+                }
+            }
+            pictureBox1.Invalidate();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    grid[i, j] = false;
+                }
+            }
+            pictureBox1.Invalidate();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Warning! Changing the maze size will result in removing all walls. Are you sure you want to change the size?",
+                "Warning",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                rows = int.Parse(rowsInput.Text);
+                cols = int.Parse(colsInput.Text);
+
+                // Resetowanie tablicy grid do nowych wymiarów
+                bool[,] newGrid = new bool[cols, rows];
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        newGrid[i, j] = false;
+                    }
+                }
+                grid = newGrid;
+
+                // Przerysowanie kontrolki pictureBox1 z nowymi wymiarami
+                pictureBox1.Height = rows * cellSize;
+                pictureBox1.Width = cols * cellSize;
+                pictureBox1.Invalidate();
+            }
+        }
+
+        private void colsInput_TextChanged(object sender, EventArgs e)
+        {
+            int colsValue, rowsValue;
+
+            if (int.TryParse(colsInput.Text, out colsValue) && colsValue <= 100 && colsValue > 0)
+            {
+                // Sprawdź, czy wartość w "rowsInput" jest liczbą i czy nie przekracza 55
+                if (int.TryParse(rowsInput.Text, out rowsValue) && rowsValue <= 55 && rowsValue > 0)
+                {
+                    button3.Enabled = true;
+                }
+                else
+                {
+                    button3.Enabled = false;
+                }
+            }
+            else
+            {
+                button3.Enabled = false;
+            }
+        }
+        public bool[,] GenerateMaze()
+        {
+            // Initialize the maze with all walls
+            bool[,] maze = new bool[cols, rows];
+            for (int x = 0; x < cols; x++)
+            {
+                for (int y = 0; y < rows; y++)
+                {
+                    maze[x, y] = true;
+                }
+            }
+
+            // Randomly remove walls to create the maze
+            Random random = new Random();
+            int startX = random.Next(cols);
+            int startY = random.Next(rows);
+            maze[startX, startY] = false;
+            GenerateMazeRecursive(maze, startX, startY, random);
+
+            return maze;
+        }
+
+        private  void GenerateMazeRecursive(bool[,] maze, int x, int y, Random random)
+        {
+            int[] directions = new int[] { 0, 1, 2, 3 };
+            Shuffle(directions, random);
+
+            foreach (int direction in directions)
+            {
+                int newX = x;
+                int newY = y;
+
+                switch (direction)
+                {
+                    // North
+                    case 0:
+                        newY--;
+                        break;
+
+                    // East
+                    case 1:
+                        newX++;
+                        break;
+
+                    // South
+                    case 2:
+                        newY++;
+                        break;
+
+                    // West
+                    case 3:
+                        newX--;
+                        break;
+                }
+
+                if (newX >= 0 && newX < maze.GetLength(0) && newY >= 0 && newY < maze.GetLength(1) && maze[newX, newY])
+                {
+                    int count = 0;
+                    if (newX > 0 && !maze[newX - 1, newY]) count++;
+                    if (newX < maze.GetLength(0) - 1 && !maze[newX + 1, newY]) count++;
+                    if (newY > 0 && !maze[newX, newY - 1]) count++;
+                    if (newY < maze.GetLength(1) - 1 && !maze[newX, newY + 1]) count++;
+
+                    if (count == 1)
+                    {
+                        maze[newX, newY] = false;
+                        GenerateMazeRecursive(maze, newX, newY, random);
+                    }
+                }
+            }
+        }
+
+        private static void Shuffle(int[] array, Random random)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                int j = random.Next(i, array.Length);
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            grid = GenerateMaze();
+            pictureBox1.Invalidate();
+            Console.WriteLine("JUHU");
         }
     }
 }
