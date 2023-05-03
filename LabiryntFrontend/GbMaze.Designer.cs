@@ -28,229 +28,225 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelTools = new System.Windows.Forms.Panel();
-            this.rowsInput = new System.Windows.Forms.TextBox();
-            this.colsInput = new System.Windows.Forms.TextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.buttonEditor = new System.Windows.Forms.Button();
-            this.panelEditor = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panelTools.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panelMenu.SuspendLayout();
-            this.panelEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
+            panelTools = new Panel();
+            rowsInput = new TextBox();
+            colsInput = new TextBox();
+            pictureBox2 = new PictureBox();
+            button8 = new Button();
+            button7 = new Button();
+            button6 = new Button();
+            button5 = new Button();
+            button4 = new Button();
+            button2 = new Button();
+            button1 = new Button();
+            button3 = new Button();
+            panelMenu = new Panel();
+            buttonEditor = new Button();
+            panelEditor = new Panel();
+            pictureBox1 = new PictureBox();
+            panelTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panelMenu.SuspendLayout();
+            panelEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // panelTools
             // 
-            this.panelTools.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelTools.Controls.Add(this.rowsInput);
-            this.panelTools.Controls.Add(this.colsInput);
-            this.panelTools.Controls.Add(this.pictureBox2);
-            this.panelTools.Controls.Add(this.button8);
-            this.panelTools.Controls.Add(this.button7);
-            this.panelTools.Controls.Add(this.button6);
-            this.panelTools.Controls.Add(this.button5);
-            this.panelTools.Controls.Add(this.button4);
-            this.panelTools.Controls.Add(this.button2);
-            this.panelTools.Controls.Add(this.button1);
-            this.panelTools.Controls.Add(this.button3);
-            this.panelTools.Location = new System.Drawing.Point(0, 0);
-            this.panelTools.Name = "panelTools";
-            this.panelTools.Size = new System.Drawing.Size(1266, 87);
-            this.panelTools.TabIndex = 0;
+            panelTools.BackColor = Color.WhiteSmoke;
+            panelTools.Controls.Add(rowsInput);
+            panelTools.Controls.Add(colsInput);
+            panelTools.Controls.Add(pictureBox2);
+            panelTools.Controls.Add(button8);
+            panelTools.Controls.Add(button7);
+            panelTools.Controls.Add(button6);
+            panelTools.Controls.Add(button5);
+            panelTools.Controls.Add(button4);
+            panelTools.Controls.Add(button2);
+            panelTools.Controls.Add(button1);
+            panelTools.Controls.Add(button3);
+            panelTools.Location = new Point(0, 0);
+            panelTools.Name = "panelTools";
+            panelTools.Size = new Size(1266, 87);
+            panelTools.TabIndex = 0;
             // 
             // rowsInput
             // 
-            this.rowsInput.Location = new System.Drawing.Point(206, 53);
-            this.rowsInput.Name = "rowsInput";
-            this.rowsInput.PlaceholderText = "rows";
-            this.rowsInput.Size = new System.Drawing.Size(62, 23);
-            this.rowsInput.TabIndex = 3;
-            this.rowsInput.TextChanged += new System.EventHandler(this.colsInput_TextChanged);
+            rowsInput.Location = new Point(219, 52);
+            rowsInput.Name = "rowsInput";
+            rowsInput.PlaceholderText = "rows";
+            rowsInput.Size = new Size(62, 23);
+            rowsInput.TabIndex = 3;
+            rowsInput.TextChanged += colsInput_TextChanged;
             // 
             // colsInput
             // 
-            this.colsInput.Location = new System.Drawing.Point(206, 16);
-            this.colsInput.Name = "colsInput";
-            this.colsInput.PlaceholderText = "cols";
-            this.colsInput.Size = new System.Drawing.Size(62, 23);
-            this.colsInput.TabIndex = 2;
-            this.colsInput.TextChanged += new System.EventHandler(this.colsInput_TextChanged);
+            colsInput.Location = new Point(219, 16);
+            colsInput.Name = "colsInput";
+            colsInput.PlaceholderText = "cols";
+            colsInput.Size = new Size(62, 23);
+            colsInput.TabIndex = 2;
+            colsInput.TextChanged += colsInput_TextChanged;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::LabiryntFrontend.Properties.Resources.logo;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(164, 63);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            pictureBox2.Image = Properties.Resources.logo;
+            pictureBox2.Location = new Point(12, 12);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(164, 63);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button8.Location = new System.Drawing.Point(1181, 15);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(60, 60);
-            this.button8.TabIndex = 0;
-            this.button8.Text = "START";
-            this.button8.UseVisualStyleBackColor = true;
+            button8.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button8.Location = new Point(1181, 15);
+            button8.Name = "button8";
+            button8.Size = new Size(60, 60);
+            button8.TabIndex = 0;
+            button8.Text = "START";
+            button8.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button7.Location = new System.Drawing.Point(865, 15);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(60, 60);
-            this.button7.TabIndex = 0;
-            this.button7.UseVisualStyleBackColor = true;
+            button7.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            button7.Location = new Point(865, 15);
+            button7.Name = "button7";
+            button7.Size = new Size(60, 60);
+            button7.TabIndex = 0;
+            button7.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button6.Location = new System.Drawing.Point(799, 15);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(60, 60);
-            this.button6.TabIndex = 0;
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            button6.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            button6.Image = Properties.Resources.generate;
+            button6.Location = new Point(799, 15);
+            button6.Name = "button6";
+            button6.Size = new Size(60, 60);
+            button6.TabIndex = 0;
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(702, 15);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(60, 60);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "Usuń wszystkie ściany";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            button5.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            button5.Image = Properties.Resources.removeAll;
+            button5.Location = new Point(702, 15);
+            button5.Name = "button5";
+            button5.Size = new Size(60, 60);
+            button5.TabIndex = 0;
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(636, 15);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(60, 60);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "Wypelnij ścianami";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            button4.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            button4.Image = Properties.Resources.addAll;
+            button4.Location = new Point(636, 15);
+            button4.Name = "button4";
+            button4.Size = new Size(60, 60);
+            button4.TabIndex = 0;
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(501, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 60);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Usuń";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.Image = Properties.Resources.removeWall;
+            button2.Location = new Point(501, 15);
+            button2.Name = "button2";
+            button2.Size = new Size(60, 60);
+            button2.TabIndex = 0;
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(435, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 60);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Dodaj";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Image = Properties.Resources.addWall;
+            button1.Location = new Point(435, 15);
+            button1.Name = "button1";
+            button1.Size = new Size(60, 60);
+            button1.TabIndex = 0;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(287, 16);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(60, 60);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Rozmiar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button3.Image = Properties.Resources.size2;
+            button3.Location = new Point(287, 16);
+            button3.Name = "button3";
+            button3.Size = new Size(60, 60);
+            button3.TabIndex = 0;
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panelMenu
             // 
-            this.panelMenu.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelMenu.Controls.Add(this.buttonEditor);
-            this.panelMenu.Location = new System.Drawing.Point(0, 87);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(200, 594);
-            this.panelMenu.TabIndex = 1;
+            panelMenu.BackColor = Color.WhiteSmoke;
+            panelMenu.Controls.Add(buttonEditor);
+            panelMenu.Location = new Point(0, 87);
+            panelMenu.Name = "panelMenu";
+            panelMenu.Size = new Size(200, 594);
+            panelMenu.TabIndex = 1;
             // 
             // buttonEditor
             // 
-            this.buttonEditor.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonEditor.Location = new System.Drawing.Point(0, 6);
-            this.buttonEditor.Name = "buttonEditor";
-            this.buttonEditor.Size = new System.Drawing.Size(200, 77);
-            this.buttonEditor.TabIndex = 0;
-            this.buttonEditor.Text = "Edytor";
-            this.buttonEditor.UseVisualStyleBackColor = true;
+            buttonEditor.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonEditor.Location = new Point(0, 6);
+            buttonEditor.Name = "buttonEditor";
+            buttonEditor.Size = new Size(200, 77);
+            buttonEditor.TabIndex = 0;
+            buttonEditor.Text = "Edytor";
+            buttonEditor.UseVisualStyleBackColor = true;
             // 
             // panelEditor
             // 
-            this.panelEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelEditor.BackColor = System.Drawing.Color.Transparent;
-            this.panelEditor.Controls.Add(this.pictureBox1);
-            this.panelEditor.Location = new System.Drawing.Point(206, 93);
-            this.panelEditor.Name = "panelEditor";
-            this.panelEditor.Size = new System.Drawing.Size(1046, 576);
-            this.panelEditor.TabIndex = 2;
+            panelEditor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelEditor.BackColor = Color.Transparent;
+            panelEditor.Controls.Add(pictureBox1);
+            panelEditor.Location = new Point(206, 93);
+            panelEditor.Name = "panelEditor";
+            panelEditor.Size = new Size(1046, 576);
+            panelEditor.TabIndex = 2;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1011, 561);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Location = new Point(24, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1011, 561);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            pictureBox1.Paint += pictureBox1_Paint;
+            pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
+            pictureBox1.MouseUp += pictureBox1_MouseUp;
             // 
             // GbMaze
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.panelEditor);
-            this.Controls.Add(this.panelMenu);
-            this.Controls.Add(this.panelTools);
-            this.Name = "GbMaze";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GbMaze";
-            this.panelTools.ResumeLayout(false);
-            this.panelTools.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panelMenu.ResumeLayout(false);
-            this.panelEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = Color.DarkSlateGray;
+            ClientSize = new Size(1264, 681);
+            Controls.Add(panelEditor);
+            Controls.Add(panelMenu);
+            Controls.Add(panelTools);
+            Name = "GbMaze";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "GbMaze";
+            panelTools.ResumeLayout(false);
+            panelTools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panelMenu.ResumeLayout(false);
+            panelEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

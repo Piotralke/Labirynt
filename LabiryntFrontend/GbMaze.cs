@@ -49,23 +49,23 @@ namespace LabiryntFrontend
                 g.DrawLine(pen, j * cellSize, 0, j * cellSize, cols * cellSize);
             }
 
-            //// Rysowanie komórek
-            //Brush brush = new SolidBrush(Color.White);
-            //for (int i = 0; i < rows; i++)
-            //{
-            //    for (int j = 0; j < cols; j++)
-            //    {
-            //        if (grid[i, j] == true)
-            //        {
-            //            brush = new SolidBrush(Color.Black);
-            //        }
-            //        else
-            //        {
-            //            brush = new SolidBrush(Color.White);
-            //        }
-            //        g.FillRectangle(brush, j * cellSize, i * cellSize, cellSize, cellSize);
-            //    }
-            //}
+            // Rysowanie komórek
+            Brush brush = new SolidBrush(Color.White);
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (grid[i, j] == true)
+                    {
+                        brush = new SolidBrush(Color.Black);
+                    }
+                    else
+                    {
+                        brush = new SolidBrush(Color.White);
+                    }
+                    g.FillRectangle(brush, j * cellSize, i * cellSize, cellSize, cellSize);
+                }
+            }
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -217,7 +217,7 @@ namespace LabiryntFrontend
             return maze;
         }
 
-        private  void GenerateMazeRecursive(bool[,] maze, int x, int y, Random random)
+        private void GenerateMazeRecursive(bool[,] maze, int x, int y, Random random)
         {
             int[] directions = new int[] { 0, 1, 2, 3 };
             Shuffle(directions, random);
@@ -284,5 +284,7 @@ namespace LabiryntFrontend
             pictureBox1.Invalidate();
             Console.WriteLine("JUHU");
         }
+
+
     }
 }
