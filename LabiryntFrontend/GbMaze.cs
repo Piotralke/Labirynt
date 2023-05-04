@@ -168,6 +168,7 @@ namespace LabiryntFrontend
                 for (int j = 0; j < cols; j++)
                 {
                     grid[i, j] = true;
+                    visited[i, j] = false;
                 }
             }
             pictureBox1.Invalidate();
@@ -180,6 +181,7 @@ namespace LabiryntFrontend
                 for (int j = 0; j < cols; j++)
                 {
                     grid[i, j] = false;
+                    visited[i, j] = false;
                 }
             }
             pictureBox1.Invalidate();
