@@ -112,7 +112,7 @@
             // button7
             // 
             button7.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
-            button7.Location = new Point(865, 15);
+            button7.Location = new Point(966, 14);
             button7.Name = "button7";
             button7.Size = new Size(60, 60);
             button7.TabIndex = 0;
@@ -122,7 +122,7 @@
             // 
             button6.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
             button6.Image = Properties.Resources.generate;
-            button6.Location = new Point(799, 15);
+            button6.Location = new Point(648, 16);
             button6.Name = "button6";
             button6.Size = new Size(60, 60);
             button6.TabIndex = 0;
@@ -133,7 +133,7 @@
             // 
             button5.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
             button5.Image = Properties.Resources.removeAll;
-            button5.Location = new Point(702, 15);
+            button5.Location = new Point(569, 16);
             button5.Name = "button5";
             button5.Size = new Size(60, 60);
             button5.TabIndex = 0;
@@ -144,7 +144,7 @@
             // 
             button4.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
             button4.Image = Properties.Resources.addAll;
-            button4.Location = new Point(636, 15);
+            button4.Location = new Point(503, 17);
             button4.Name = "button4";
             button4.Size = new Size(60, 60);
             button4.TabIndex = 0;
@@ -155,7 +155,7 @@
             // 
             button2.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             button2.Image = Properties.Resources.removeWall;
-            button2.Location = new Point(501, 15);
+            button2.Location = new Point(428, 17);
             button2.Name = "button2";
             button2.Size = new Size(60, 60);
             button2.TabIndex = 0;
@@ -166,7 +166,7 @@
             // 
             button1.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             button1.Image = Properties.Resources.addWall;
-            button1.Location = new Point(435, 15);
+            button1.Location = new Point(362, 16);
             button1.Name = "button1";
             button1.Size = new Size(60, 60);
             button1.TabIndex = 0;
@@ -229,6 +229,7 @@
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+            AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.DarkSlateGray;
             ClientSize = new Size(1264, 681);
