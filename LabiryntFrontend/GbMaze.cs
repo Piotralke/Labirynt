@@ -37,7 +37,7 @@ namespace LabiryntFrontend
         }
         private void buttonEditor_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace LabiryntFrontend
         {
             visited[row, col] = true; // oznaczamy bieżącą komórkę jako odwiedzoną
             pictureBox1.Invalidate(); // odświeżenie kontrolki
-            
+
             // sprawdzamy sąsiadów bieżącej komórki
             if (row > 0 && !visited[row - 1, col] && !grid[row, col] && !grid[row - 1, col]) // górna komórka
             {
