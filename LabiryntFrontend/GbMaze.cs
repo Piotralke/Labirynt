@@ -1,8 +1,10 @@
 ﻿using LabiryntBackend.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -31,125 +33,47 @@ namespace LabiryntFrontend
         public GbMaze()
         {
             InitializeComponent();
-            button3.Enabled = false;
             pictureBox1.Height = rows * cellSize;
             pictureBox1.Width = cols * cellSize;
         }
         private void buttonEditor_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
             visited = new bool[rows, cols]; // inicjujemy tablicę visited
-            DFS(0, 0); // wywołujemy algorytm DFS od komórki (0, 0)
+         //   DFS(0, 0); // wywołujemy algorytm DFS od komórki (0, 0)
             pictureBox1.Invalidate(); // odświeżenie kontrolki
         }
 
-        private void DFS(int row, int col)
-        {
-            visited[row, col] = true; // oznaczamy bieżącą komórkę jako odwiedzoną
-            pictureBox1.Invalidate(); // odświeżenie kontrolki
-            
-            // sprawdzamy sąsiadów bieżącej komórki
-            if (row > 0 && !visited[row - 1, col] && !grid[row, col] && !grid[row - 1, col]) // górna komórka
-            {
-                DFS(row - 1, col);
-            }
-            if (col < cols - 1 && !visited[row, col + 1] && !grid[row, col] && !grid[row, col + 1]) // prawa komórka
-            {
-                DFS(row, col + 1);
-            }
-            if (row < rows - 1 && !visited[row + 1, col] && !grid[row, col] && !grid[row + 1, col]) // dolna komórka
-            {
-                DFS(row + 1, col);
-            }
-            if (col > 0 && !visited[row, col - 1] && !grid[row, col] && !grid[row, col - 1]) // lewa komórka
-            {
-                DFS(row, col - 1);
-            }
-        }
+        //private void DFS(int row, int col)
+        //{
+        //    visited[row, col] = true; // oznaczamy bieżącą komórkę jako odwiedzoną
+        //    pictureBox1.Invalidate(); // odświeżenie kontrolki
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            // Rysowanie siatki
-            Pen pen = new Pen(Color.Black, 1);
-            for (int i = 0; i <= rows; i++)
-            {
-                g.DrawLine(pen, 0, i * cellSize, rows * cellSize, i * cellSize);
-            }
-            for (int j = 0; j <= cols; j++)
-            {
-                g.DrawLine(pen, j * cellSize, 0, j * cellSize, cols * cellSize);
-            }
+        //    // sprawdzamy sąsiadów bieżącej komórki
+        //    if (row > 0 && !visited[row - 1, col] && !grid[row, col] && !grid[row - 1, col]) // górna komórka
+        //    {
+        //        DFS(row - 1, col);
+        //    }
+        //    if (col < cols - 1 && !visited[row, col + 1] && !grid[row, col] && !grid[row, col + 1]) // prawa komórka
+        //    {
+        //        DFS(row, col + 1);
+        //    }
+        //    if (row < rows - 1 && !visited[row + 1, col] && !grid[row, col] && !grid[row + 1, col]) // dolna komórka
+        //    {
+        //        DFS(row + 1, col);
+        //    }
+        //    if (col > 0 && !visited[row, col - 1] && !grid[row, col] && !grid[row, col - 1]) // lewa komórka
+        //    {
+        //        DFS(row, col - 1);
+        //    }
+        //}
 
-            // Rysowanie komórek
-            Brush brush = new SolidBrush(Color.White);
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    if (visited[i, j] == true)
-                    {
-                        brush = new SolidBrush(Color.Yellow); // oznaczamy odwiedzone komórki na żółto
-                    }
-                    else if (grid[i, j])
-                    {
-                        brush = new SolidBrush(Color.Black);
-                    }
-                    else
-                    {
-                        brush = new SolidBrush(Color.White);
-                    }
-                    g.FillRectangle(brush, j * cellSize, i * cellSize, cellSize, cellSize);
-                }
-            }
-        }
+        
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            int row = e.Y / cellSize;
-            int col = e.X / cellSize;
-            if (row < rows && col < cols)
-            {
-                isDrawing = true;
-                currentRow = row;
-                currentCol = col;
-                if (row >= 0 && row < rows && col >= 0 && col < cols)
-                {
-                    grid[row, col] = isWall;
-                }
-                pictureBox1.Invalidate(); // odświeżenie kontrolki
-            }
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            isDrawing = false;
-            currentRow = -1;
-            currentCol = -1;
-        }
-
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDrawing)
-            {
-                int row = e.Y / cellSize;
-                int col = e.X / cellSize;
-                if (row < rows && col < cols && (row != currentRow || col != currentCol))
-                {
-                    currentRow = row;
-                    currentCol = col;
-                    if (row >= 0 && row < rows && col >= 0 && col < cols)
-                    {
-                        grid[row, col] = isWall;
-                    }
-                    pictureBox1.Invalidate(); // odświeżenie kontrolki
-                }
-            }
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -218,114 +142,240 @@ namespace LabiryntFrontend
 
         private void colsInput_TextChanged(object sender, EventArgs e)
         {
-            int colsValue, rowsValue;
 
-            if (int.TryParse(colsInput.Text, out colsValue) && colsValue <= 100 && colsValue > 0)
+        }
+        public enum Direction
+        {
+            N = 1,
+            W = 2
+        }
+
+        Stack s_stack;
+        Random r;
+
+        public int MSIZEX;
+        public int MSIZEY;
+        public int[] maze_base;
+        public byte[,] maze_data;
+
+        public void GenerateMaze(int sizeX, int sizeY, int seed)
+        {
+            MSIZEX = sizeX;
+            MSIZEY = sizeY;
+            maze_base = new int[MSIZEX * MSIZEY];
+            maze_data = new Byte[MSIZEX, MSIZEY];
+
+            s_stack = new Stack();
+            r = new Random(seed);
+
+            MazeInit(r);
+
+            cMazeState s = new cMazeState(r.Next() % MSIZEX, r.Next() % MSIZEY, 0);
+            analyze_cell(s, r);
+        }
+        void analyze_cell(cMazeState s, Random r)
+        {
+            bool bEnd = false, found;
+            int indexSrc, indexDest, tDir = 0, prevDir = 0;
+
+            while (true)
             {
-                // Sprawdź, czy wartość w "rowsInput" jest liczbą i czy nie przekracza 55
-                if (int.TryParse(rowsInput.Text, out rowsValue) && rowsValue <= 55 && rowsValue > 0)
+                if (s.dir == 15)
                 {
-                    button3.Enabled = true;
+                    while (s.dir == 15)
+                    {
+                        s = (cMazeState)s_stack.pop();
+                        if (s == null)
+                        {
+                            bEnd = true;
+                            break;
+                        }
+                    }
+                    if (bEnd == true) break;
                 }
                 else
                 {
-                    button3.Enabled = false;
-                }
-            }
-            else
-            {
-                button3.Enabled = false;
-            }
-        }
-        public bool[,] GenerateMaze()
-        {
-            // Initialize the maze with all walls
-            bool[,] maze = new bool[cols, rows];
-            for (int x = 0; x < cols; x++)
-            {
-                for (int y = 0; y < rows; y++)
-                {
-                    maze[x, y] = true;
-                }
-            }
-
-            // Randomly remove walls to create the maze
-            Random random = new Random();
-            int startX = random.Next(cols);
-            int startY = random.Next(rows);
-            maze[startX, startY] = false;
-            GenerateMazeRecursive(maze, startX, startY, random);
-
-            return maze;
-        }
-
-        private void GenerateMazeRecursive(bool[,] maze, int x, int y, Random random)
-        {
-            int[] directions = new int[] { 0, 1, 2, 3 };
-            Shuffle(directions, random);
-
-            foreach (int direction in directions)
-            {
-                int newX = x;
-                int newY = y;
-
-                switch (direction)
-                {
-                    // North
-                    case 0:
-                        newY--;
-                        break;
-
-                    // East
-                    case 1:
-                        newX++;
-                        break;
-
-                    // South
-                    case 2:
-                        newY++;
-                        break;
-
-                    // West
-                    case 3:
-                        newX--;
-                        break;
-                }
-
-                if (newX >= 0 && newX < maze.GetLength(0) && newY >= 0 && newY < maze.GetLength(1) && maze[newX, newY])
-                {
-                    int count = 0;
-                    if (newX > 0 && !maze[newX - 1, newY]) count++;
-                    if (newX < maze.GetLength(0) - 1 && !maze[newX + 1, newY]) count++;
-                    if (newY > 0 && !maze[newX, newY - 1]) count++;
-                    if (newY < maze.GetLength(1) - 1 && !maze[newX, newY + 1]) count++;
-
-                    if (count == 1)
+                    do
                     {
-                        maze[newX, newY] = false;
-                        GenerateMazeRecursive(maze, newX, newY, random);
-                    }
-                }
-            }
-        }
+                        prevDir = tDir;
+                        tDir = (int)Math.Pow(2, r.Next() % 4);
 
-        private static void Shuffle(int[] array, Random random)
+                        // if ( (r.Next()%32) < iSmooth )		SMOOTH DO WYJEBANIA
+                        // 	if ( (s.dir & prevDir) == 0 )
+                        // 		tDir = prevDir;
+
+                        if ((s.dir & tDir) != 0)
+                            found = true;
+                        else
+                            found = false;
+                    } while (found == true && s.dir != 15);
+
+                    s.dir |= tDir;
+
+                    indexSrc = cell_index(s.x, s.y);
+
+                    // direction W
+                    if (tDir == 1 && s.x > 0)
+                    {
+                        indexDest = cell_index(s.x - 1, s.y);
+                        if (base_cell(indexSrc) != base_cell(indexDest))
+                        {
+                            merge(indexSrc, indexDest);
+                            maze_data[s.x, s.y] |= (byte)Direction.W;
+
+                            s_stack.push(new cMazeState(s));
+                            s.x -= 1; s.dir = 0;
+                        }
+                    }
+
+                    // direction E
+                    if (tDir == 2 && s.x < MSIZEX - 1)
+                    {
+                        indexDest = cell_index(s.x + 1, s.y);
+                        if (base_cell(indexSrc) != base_cell(indexDest))
+                        {
+                            merge(indexSrc, indexDest);
+                            maze_data[s.x + 1, s.y] |= (byte)Direction.W;
+
+                            s_stack.push(new cMazeState(s));
+                            s.x += 1; s.dir = 0;
+                        }
+                    }
+
+                    // direction N
+                    if (tDir == 4 && s.y > 0)
+                    {
+                        indexDest = cell_index(s.x, s.y - 1);
+                        if (base_cell(indexSrc) != base_cell(indexDest))
+                        {
+                            merge(indexSrc, indexDest);
+                            maze_data[s.x, s.y] |= (byte)Direction.N;
+
+                            s_stack.push(new cMazeState(s));
+                            s.y -= 1; s.dir = 0;
+                        }
+                    }
+
+                    // direction S
+                    if (tDir == 8 && s.y < MSIZEY - 1)
+                    {
+                        indexDest = cell_index(s.x, s.y + 1);
+                        if (base_cell(indexSrc) != base_cell(indexDest))
+                        {
+                            merge(indexSrc, indexDest);
+                            maze_data[s.x, s.y + 1] |= (byte)Direction.N;
+
+                            s_stack.push(new cMazeState(s));
+                            s.y += 1; s.dir = 0;
+                        }
+                    }
+                } // else
+            } // while 
+        } // function
+        int cell_index(int x, int y)
         {
-            for (int i = 0; i < array.Length; i++)
+            return MSIZEX * y + x;
+        }
+        int base_cell(int tIndex)
+        {
+            int index = tIndex;
+            while (maze_base[index] >= 0)
             {
-                int j = random.Next(i, array.Length);
-                int temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
+                index = maze_base[index];
             }
+            return index;
+        }
+        void merge(int index1, int index2)
+        {
+            // merge both lists
+            int base1 = base_cell(index1);
+            int base2 = base_cell(index2);
+            maze_base[base2] = base1;
+        }
+        void MazeInit(Random r)
+        {
+            int i, j;
+
+            // maze data
+            for (i = 0; i < MSIZEX; i++)
+                for (j = 0; j < MSIZEY; j++)
+                {
+                    maze_base[cell_index(i, j)] = -1;
+                    maze_data[i, j] = 0;
+                }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            grid = GenerateMaze();
-            pictureBox1.Invalidate();
-            Console.WriteLine("JUHU");
+            GenerateMaze(cols,rows,0);
+            pictureBox1.Image = GetBitmap(cols * 20, rows * 20);
+            //pictureBox1.Invalidate();
         }
 
+        private void GbMaze_Load(object sender, EventArgs e)
+        {
+
+        }
+        public Bitmap GetBitmap(int xS, int yS)
+        {
+            int i, j;
+
+            Bitmap tB = new Bitmap(xS + 1, yS + 1);
+            Graphics g = Graphics.FromImage((Image)tB);
+
+            Brush w = Brushes.White;
+            Brush r = Brushes.Red;
+            Brush b = Brushes.Blue;
+
+            Pen bp = new Pen(b, 1);
+            Pen rp = new Pen(r, 1);
+
+            // background
+            g.FillRectangle(w, 0, 0, tB.Width - 1, tB.Height - 1);
+            g.DrawRectangle(bp, 0, 0, tB.Width - 1, tB.Height - 1);
+
+            int xSize = xS / MSIZEX;
+            int ySize = yS / MSIZEY;
+            for (i = 0; i < MSIZEX; i++)
+                for (j = 0; j < MSIZEY; j++)
+                {
+                    Debug.WriteLine("Maze data i: "+i +" j: "+j +" maze_data[i,j] = " + maze_data[i, j]);
+                    // inspect the maze
+                    if ((maze_data[i, j] & (byte)Direction.N) == 0)
+                        g.DrawLine(bp,
+                            new Point(xSize * i, ySize * j),
+                            new Point(xSize * (i + 1), ySize * j));
+
+                    if ((maze_data[i, j] & (byte)Direction.W) == 0)
+                        g.DrawLine(bp,
+                            new Point(xSize * i, ySize * j),
+                            new Point(xSize * i, ySize * (j + 1)));
+
+                }
+
+            // start & end
+            g.DrawLine(rp, 0, 0, xSize, 0);
+            g.DrawLine(rp, 0, 0, 0, xSize);
+            g.DrawLine(rp, xS, yS, xS - xSize, yS);
+            g.DrawLine(rp, xS, yS, xS, yS - ySize);
+
+            g.Dispose();
+
+            return tB;
+        }
+
+    }
+    public class cMazeState
+    {
+        public int x, y, dir;
+        public cMazeState(int tx, int ty, int td) { x = tx; y = ty; dir = td; }
+        public cMazeState(cMazeState s) { x = s.x; y = s.y; dir = s.dir; }
+    }
+
+    public class cCellPosition
+    {
+        public int x, y;
+        public cCellPosition() { }
+        public cCellPosition(int xp, int yp) { x = xp; y = yp; }
     }
 }

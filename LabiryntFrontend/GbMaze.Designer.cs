@@ -206,27 +206,24 @@
             // panelEditor
             // 
             panelEditor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelEditor.AutoScroll = true;
             panelEditor.BackColor = Color.Transparent;
             panelEditor.Controls.Add(pictureBox1);
-            panelEditor.Location = new Point(206, 93);
+            panelEditor.Location = new Point(198, 87);
             panelEditor.Name = "panelEditor";
-            panelEditor.Size = new Size(1046, 576);
+            panelEditor.Size = new Size(1065, 594);
             panelEditor.TabIndex = 2;
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Location = new Point(24, 12);
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Location = new Point(8, 6);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1011, 561);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.Size = new Size(891, 485);
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.Paint += pictureBox1_Paint;
-            pictureBox1.MouseDown += pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
-            pictureBox1.MouseUp += pictureBox1_MouseUp;
             // 
             // GbMaze
             // 
@@ -241,11 +238,13 @@
             Name = "GbMaze";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GbMaze";
+            Load += GbMaze_Load;
             panelTools.ResumeLayout(false);
             panelTools.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panelMenu.ResumeLayout(false);
             panelEditor.ResumeLayout(false);
+            panelEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
