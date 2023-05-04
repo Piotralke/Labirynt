@@ -25,6 +25,9 @@ namespace LabiryntFrontend
         private int currentRow = -1; // numer wiersza aktualnie rysowanej komórki
         private int currentCol = -1; // numer kolumny aktualnie rysowanej komórki
         private bool isWall = true;
+
+        private bool[,] visited = new bool[10, 10];
+
         public GbMaze()
         {
             InitializeComponent();
@@ -34,7 +37,40 @@ namespace LabiryntFrontend
         }
         private void buttonEditor_Click(object sender, EventArgs e)
         {
+            
         }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            visited = new bool[rows, cols]; // inicjujemy tablicę visited
+            DFS(0, 0); // wywołujemy algorytm DFS od komórki (0, 0)
+            pictureBox1.Invalidate(); // odświeżenie kontrolki
+        }
+
+        private void DFS(int row, int col)
+        {
+            visited[row, col] = true; // oznaczamy bieżącą komórkę jako odwiedzoną
+            pictureBox1.Invalidate(); // odświeżenie kontrolki
+            
+            // sprawdzamy sąsiadów bieżącej komórki
+            if (row > 0 && !visited[row - 1, col] && !grid[row, col] && !grid[row - 1, col]) // górna komórka
+            {
+                DFS(row - 1, col);
+            }
+            if (col < cols - 1 && !visited[row, col + 1] && !grid[row, col] && !grid[row, col + 1]) // prawa komórka
+            {
+                DFS(row, col + 1);
+            }
+            if (row < rows - 1 && !visited[row + 1, col] && !grid[row, col] && !grid[row + 1, col]) // dolna komórka
+            {
+                DFS(row + 1, col);
+            }
+            if (col > 0 && !visited[row, col - 1] && !grid[row, col] && !grid[row, col - 1]) // lewa komórka
+            {
+                DFS(row, col - 1);
+            }
+        }
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -55,7 +91,11 @@ namespace LabiryntFrontend
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    if (grid[i, j] == true)
+                    if (visited[i, j])
+                    {
+                        brush = new SolidBrush(Color.Yellow); // oznaczamy odwiedzone komórki na żółto
+                    }
+                    else if (grid[i, j])
                     {
                         brush = new SolidBrush(Color.Black);
                     }
@@ -166,7 +206,7 @@ namespace LabiryntFrontend
                     }
                 }
                 grid = newGrid;
-
+                visited = newGrid;
                 // Przerysowanie kontrolki pictureBox1 z nowymi wymiarami
                 pictureBox1.Height = rows * cellSize;
                 pictureBox1.Width = cols * cellSize;
@@ -284,7 +324,6 @@ namespace LabiryntFrontend
             pictureBox1.Invalidate();
             Console.WriteLine("JUHU");
         }
-
 
     }
 }

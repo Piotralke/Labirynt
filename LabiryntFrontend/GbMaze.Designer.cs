@@ -32,7 +32,7 @@
             rowsInput = new TextBox();
             colsInput = new TextBox();
             pictureBox2 = new PictureBox();
-            button8 = new Button();
+            buttonStart = new Button();
             button7 = new Button();
             button6 = new Button();
             button5 = new Button();
@@ -57,7 +57,7 @@
             panelTools.Controls.Add(rowsInput);
             panelTools.Controls.Add(colsInput);
             panelTools.Controls.Add(pictureBox2);
-            panelTools.Controls.Add(button8);
+            panelTools.Controls.Add(buttonStart);
             panelTools.Controls.Add(button7);
             panelTools.Controls.Add(button6);
             panelTools.Controls.Add(button5);
@@ -98,15 +98,16 @@
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
             // 
-            // button8
+            // buttonStart
             // 
-            button8.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button8.Location = new Point(1181, 15);
-            button8.Name = "button8";
-            button8.Size = new Size(60, 60);
-            button8.TabIndex = 0;
-            button8.Text = "START";
-            button8.UseVisualStyleBackColor = true;
+            buttonStart.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonStart.Location = new Point(1181, 15);
+            buttonStart.Name = "buttonStart";
+            buttonStart.Size = new Size(60, 60);
+            buttonStart.TabIndex = 0;
+            buttonStart.Text = "START";
+            buttonStart.UseVisualStyleBackColor = true;
+            buttonStart.Click += buttonStart_Click;
             // 
             // button7
             // 
@@ -256,7 +257,7 @@
         private Button button3;
         private Button buttonEditor;
         private Panel panelEditor;
-        private Button button8;
+        private Button buttonStart;
         private Button button7;
         private Button button6;
         private Button button5;
