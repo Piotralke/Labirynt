@@ -44,7 +44,6 @@
             buttonEditor = new Button();
             panelEditor = new Panel();
             pictureBox1 = new PictureBox();
-            button8 = new Button();
             panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelMenu.SuspendLayout();
@@ -209,7 +208,6 @@
             panelEditor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelEditor.AutoScroll = true;
             panelEditor.BackColor = Color.Transparent;
-            panelEditor.Controls.Add(button8);
             panelEditor.Controls.Add(pictureBox1);
             panelEditor.Location = new Point(206, 93);
             panelEditor.Name = "panelEditor";
@@ -230,15 +228,6 @@
             pictureBox1.MouseDown += pictureBox1_MouseDown;
             pictureBox1.MouseMove += pictureBox1_MouseMove;
             pictureBox1.MouseUp += pictureBox1_MouseUp;
-            // 
-            // button8
-            // 
-            button8.Location = new Point(181, 544);
-            button8.Name = "button8";
-            button8.Size = new Size(75, 58);
-            button8.TabIndex = 1;
-            button8.Text = "button8";
-            button8.UseVisualStyleBackColor = true;
             // 
             // GbMaze
             // 
@@ -280,6 +269,5 @@
         private TextBox rowsInput;
         private TextBox colsInput;
         private PictureBox pictureBox2;
-        private Button button8;
     }
 }
