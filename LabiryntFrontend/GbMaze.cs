@@ -91,7 +91,7 @@ namespace LabiryntFrontend
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    if (visited[i, j])
+                    if (visited[i, j] == true)
                     {
                         brush = new SolidBrush(Color.Yellow); // oznaczamy odwiedzone komórki na żółto
                     }
