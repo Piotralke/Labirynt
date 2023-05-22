@@ -26,12 +26,7 @@ namespace LabiryntFrontend
         private int rows = 10; // ilość wierszy
         private int cols = 10; // ilość kolumn
 
-        private bool[,] grid = new bool[10, 10]; // tablica dwuwymiarowa przechowująca wartości komórek
-
-        private bool isDrawing = false; // zmienna logiczna określająca, czy użytkownik aktualnie rysuje
-        private int currentRow = -1; // numer wiersza aktualnie rysowanej komórki
-        private int currentCol = -1; // numer kolumny aktualnie rysowanej komórki
-        private bool isWall = true;
+        int seedValue = 0;
 
         Stack s_stack;
         Random r;
@@ -118,13 +113,13 @@ namespace LabiryntFrontend
 
         private void button1_Click(object sender, EventArgs e)
         {
-            isWall = true;
+            
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            isWall = false;
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -164,9 +159,9 @@ namespace LabiryntFrontend
 
                 // Resetowanie tablicy grid do nowych wymiarów
                 byte[,] newGrid = new byte[cols, rows];
-                for (int i = 0; i < rows; i++)
+                for (int i = 0; i < cols; i++)
                 {
-                    for (int j = 0; j < cols; j++)
+                    for (int j = 0; j < rows; j++)
                     {
                         newGrid[i, j] = 3;
                     }
@@ -354,7 +349,7 @@ namespace LabiryntFrontend
 
         private void button6_Click(object sender, EventArgs e)
         {
-            GenerateMaze(cols, rows, 0);
+            GenerateMaze(cols, rows, seedValue);
             pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
             //pictureBox1.Invalidate();
         }
@@ -555,8 +550,7 @@ namespace LabiryntFrontend
 
         private void seedInput_TextChanged(object sender, EventArgs e)
         {
-            int seedValue;
-
+            
             if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646 )
             {
                 button6.Enabled = true;

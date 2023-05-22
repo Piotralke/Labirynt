@@ -83,6 +83,26 @@ namespace LabiryntFrontend.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap algorithmIMG {
+            get {
+                object obj = ResourceManager.GetObject("algorithmIMG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap algorithmIMG1 {
+            get {
+                object obj = ResourceManager.GetObject("algorithmIMG1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap generate {
             get {
                 object obj = ResourceManager.GetObject("generate", resourceCulture);
@@ -176,6 +196,36 @@ namespace LabiryntFrontend.Properties {
         internal static System.Drawing.Bitmap size2 {
             get {
                 object obj = ResourceManager.GetObject("size2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap startButton {
+            get {
+                object obj = ResourceManager.GetObject("startButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap startButton1 {
+            get {
+                object obj = ResourceManager.GetObject("startButton1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap startButton2 {
+            get {
+                object obj = ResourceManager.GetObject("startButton2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
