@@ -85,8 +85,8 @@ namespace LabiryntFrontend
             p.Dispose();
             g.Dispose();
 
-            
-            
+
+
         }
 
 

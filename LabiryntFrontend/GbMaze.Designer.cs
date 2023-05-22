@@ -40,13 +40,10 @@
             button2 = new Button();
             button1 = new Button();
             button3 = new Button();
-            panelMenu = new Panel();
-            buttonEditor = new Button();
             panelEditor = new Panel();
             pictureBox1 = new PictureBox();
             panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            panelMenu.SuspendLayout();
             panelEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -184,34 +181,15 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
-            // panelMenu
-            // 
-            panelMenu.BackColor = Color.WhiteSmoke;
-            panelMenu.Controls.Add(buttonEditor);
-            panelMenu.Location = new Point(0, 87);
-            panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(200, 594);
-            panelMenu.TabIndex = 1;
-            // 
-            // buttonEditor
-            // 
-            buttonEditor.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonEditor.Location = new Point(0, 6);
-            buttonEditor.Name = "buttonEditor";
-            buttonEditor.Size = new Size(200, 77);
-            buttonEditor.TabIndex = 0;
-            buttonEditor.Text = "Edytor";
-            buttonEditor.UseVisualStyleBackColor = true;
-            // 
             // panelEditor
             // 
             panelEditor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelEditor.AutoScroll = true;
             panelEditor.BackColor = Color.Transparent;
             panelEditor.Controls.Add(pictureBox1);
-            panelEditor.Location = new Point(198, 87);
+            panelEditor.Location = new Point(0, 87);
             panelEditor.Name = "panelEditor";
-            panelEditor.Size = new Size(1065, 594);
+            panelEditor.Size = new Size(1263, 594);
             panelEditor.TabIndex = 2;
             // 
             // pictureBox1
@@ -234,7 +212,6 @@
             BackColor = Color.DarkSlateGray;
             ClientSize = new Size(1264, 681);
             Controls.Add(panelEditor);
-            Controls.Add(panelMenu);
             Controls.Add(panelTools);
             Name = "GbMaze";
             StartPosition = FormStartPosition.CenterScreen;
@@ -243,7 +220,6 @@
             panelTools.ResumeLayout(false);
             panelTools.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            panelMenu.ResumeLayout(false);
             panelEditor.ResumeLayout(false);
             panelEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -253,9 +229,7 @@
         #endregion
 
         private Panel panelTools;
-        private Panel panelMenu;
         private Button button3;
-        private Button buttonEditor;
         private Panel panelEditor;
         private Button buttonStart;
         private Button button7;
