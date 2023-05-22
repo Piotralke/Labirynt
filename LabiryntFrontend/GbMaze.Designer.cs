@@ -28,202 +28,205 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panelTools = new Panel();
-            rowsInput = new TextBox();
-            colsInput = new TextBox();
-            pictureBox2 = new PictureBox();
-            buttonStart = new Button();
-            button7 = new Button();
-            button6 = new Button();
-            button5 = new Button();
-            button4 = new Button();
-            button2 = new Button();
-            button1 = new Button();
-            button3 = new Button();
-            panelEditor = new Panel();
-            pictureBox1 = new PictureBox();
-            panelTools.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            panelEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            SuspendLayout();
+            this.panelTools = new System.Windows.Forms.Panel();
+            this.rowsInput = new System.Windows.Forms.TextBox();
+            this.colsInput = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.panelEditor = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.seedInput = new System.Windows.Forms.TextBox();
+            this.panelTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panelEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
             // 
             // panelTools
             // 
-            panelTools.BackColor = Color.WhiteSmoke;
-            panelTools.Controls.Add(rowsInput);
-            panelTools.Controls.Add(colsInput);
-            panelTools.Controls.Add(pictureBox2);
-            panelTools.Controls.Add(buttonStart);
-            panelTools.Controls.Add(button7);
-            panelTools.Controls.Add(button6);
-            panelTools.Controls.Add(button5);
-            panelTools.Controls.Add(button4);
-            panelTools.Controls.Add(button2);
-            panelTools.Controls.Add(button1);
-            panelTools.Controls.Add(button3);
-            panelTools.Location = new Point(0, 0);
-            panelTools.Name = "panelTools";
-            panelTools.Size = new Size(1266, 87);
-            panelTools.TabIndex = 0;
+            this.panelTools.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelTools.Controls.Add(this.seedInput);
+            this.panelTools.Controls.Add(this.rowsInput);
+            this.panelTools.Controls.Add(this.colsInput);
+            this.panelTools.Controls.Add(this.pictureBox2);
+            this.panelTools.Controls.Add(this.buttonStart);
+            this.panelTools.Controls.Add(this.button7);
+            this.panelTools.Controls.Add(this.button6);
+            this.panelTools.Controls.Add(this.button5);
+            this.panelTools.Controls.Add(this.button4);
+            this.panelTools.Controls.Add(this.button2);
+            this.panelTools.Controls.Add(this.button1);
+            this.panelTools.Controls.Add(this.button3);
+            this.panelTools.Location = new System.Drawing.Point(0, 0);
+            this.panelTools.Name = "panelTools";
+            this.panelTools.Size = new System.Drawing.Size(1266, 87);
+            this.panelTools.TabIndex = 0;
             // 
             // rowsInput
             // 
-            rowsInput.Location = new Point(219, 52);
-            rowsInput.Name = "rowsInput";
-            rowsInput.PlaceholderText = "rows";
-            rowsInput.Size = new Size(62, 23);
-            rowsInput.TabIndex = 3;
-            rowsInput.TextChanged += colsInput_TextChanged;
+            this.rowsInput.Location = new System.Drawing.Point(219, 52);
+            this.rowsInput.Name = "rowsInput";
+            this.rowsInput.PlaceholderText = "rows";
+            this.rowsInput.Size = new System.Drawing.Size(62, 23);
+            this.rowsInput.TabIndex = 3;
             // 
             // colsInput
             // 
-            colsInput.Location = new Point(219, 16);
-            colsInput.Name = "colsInput";
-            colsInput.PlaceholderText = "cols";
-            colsInput.Size = new Size(62, 23);
-            colsInput.TabIndex = 2;
-            colsInput.TextChanged += colsInput_TextChanged;
+            this.colsInput.Location = new System.Drawing.Point(219, 16);
+            this.colsInput.Name = "colsInput";
+            this.colsInput.PlaceholderText = "cols";
+            this.colsInput.Size = new System.Drawing.Size(62, 23);
+            this.colsInput.TabIndex = 2;
             // 
             // pictureBox2
             // 
-            pictureBox2.Image = Properties.Resources.logo;
-            pictureBox2.Location = new Point(12, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(164, 63);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 1;
-            pictureBox2.TabStop = false;
+            this.pictureBox2.Image = global::LabiryntFrontend.Properties.Resources.logo;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(164, 63);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
             // 
             // buttonStart
             // 
-            buttonStart.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonStart.Location = new Point(1181, 15);
-            buttonStart.Name = "buttonStart";
-            buttonStart.Size = new Size(60, 60);
-            buttonStart.TabIndex = 0;
-            buttonStart.Text = "START";
-            buttonStart.UseVisualStyleBackColor = true;
-            buttonStart.Click += buttonStart_Click;
+            this.buttonStart.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonStart.Location = new System.Drawing.Point(1181, 15);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(60, 60);
+            this.buttonStart.TabIndex = 0;
+            this.buttonStart.Text = "START";
+            this.buttonStart.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            button7.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
-            button7.Location = new Point(966, 14);
-            button7.Name = "button7";
-            button7.Size = new Size(60, 60);
-            button7.TabIndex = 0;
-            button7.UseVisualStyleBackColor = true;
+            this.button7.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button7.Location = new System.Drawing.Point(966, 14);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(60, 60);
+            this.button7.TabIndex = 0;
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            button6.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
-            button6.Image = Properties.Resources.generate;
-            button6.Location = new Point(648, 16);
-            button6.Name = "button6";
-            button6.Size = new Size(60, 60);
-            button6.TabIndex = 0;
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button6.Image = global::LabiryntFrontend.Properties.Resources.generate;
+            this.button6.Location = new System.Drawing.Point(714, 17);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(60, 60);
+            this.button6.TabIndex = 0;
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            button5.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
-            button5.Image = Properties.Resources.removeAll;
-            button5.Location = new Point(569, 16);
-            button5.Name = "button5";
-            button5.Size = new Size(60, 60);
-            button5.TabIndex = 0;
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button5.Image = global::LabiryntFrontend.Properties.Resources.removeAll;
+            this.button5.Location = new System.Drawing.Point(569, 16);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(60, 60);
+            this.button5.TabIndex = 0;
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            button4.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
-            button4.Image = Properties.Resources.addAll;
-            button4.Location = new Point(503, 17);
-            button4.Name = "button4";
-            button4.Size = new Size(60, 60);
-            button4.TabIndex = 0;
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button4.Image = global::LabiryntFrontend.Properties.Resources.addAll;
+            this.button4.Location = new System.Drawing.Point(503, 17);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(60, 60);
+            this.button4.TabIndex = 0;
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.Image = Properties.Resources.removeWall;
-            button2.Location = new Point(428, 17);
-            button2.Name = "button2";
-            button2.Size = new Size(60, 60);
-            button2.TabIndex = 0;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.Image = global::LabiryntFrontend.Properties.Resources.removeWall;
+            this.button2.Location = new System.Drawing.Point(428, 17);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(60, 60);
+            this.button2.TabIndex = 0;
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            button1.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Image = Properties.Resources.addWall;
-            button1.Location = new Point(362, 16);
-            button1.Name = "button1";
-            button1.Size = new Size(60, 60);
-            button1.TabIndex = 0;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Image = global::LabiryntFrontend.Properties.Resources.addWall;
+            this.button1.Location = new System.Drawing.Point(362, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 60);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.Image = Properties.Resources.size2;
-            button3.Location = new Point(287, 16);
-            button3.Name = "button3";
-            button3.Size = new Size(60, 60);
-            button3.TabIndex = 0;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.Image = global::LabiryntFrontend.Properties.Resources.size2;
+            this.button3.Location = new System.Drawing.Point(287, 16);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(60, 60);
+            this.button3.TabIndex = 0;
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // panelEditor
             // 
-            panelEditor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panelEditor.AutoScroll = true;
-            panelEditor.BackColor = Color.Transparent;
-            panelEditor.Controls.Add(pictureBox1);
-            panelEditor.Location = new Point(0, 87);
-            panelEditor.Name = "panelEditor";
-            panelEditor.Size = new Size(1263, 594);
-            panelEditor.TabIndex = 2;
+            this.panelEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEditor.AutoScroll = true;
+            this.panelEditor.BackColor = System.Drawing.Color.Transparent;
+            this.panelEditor.Controls.Add(this.pictureBox1);
+            this.panelEditor.Location = new System.Drawing.Point(0, 87);
+            this.panelEditor.Name = "panelEditor";
+            this.panelEditor.Size = new System.Drawing.Size(1263, 594);
+            this.panelEditor.TabIndex = 2;
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(8, 6);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(891, 485);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(891, 485);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // seedInput
+            // 
+            this.seedInput.Location = new System.Drawing.Point(635, 35);
+            this.seedInput.Name = "seedInput";
+            this.seedInput.Size = new System.Drawing.Size(73, 23);
+            this.seedInput.TabIndex = 4;
+            this.seedInput.TextChanged += new System.EventHandler(this.seedInput_TextChanged);
             // 
             // GbMaze
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            BackColor = Color.DarkSlateGray;
-            ClientSize = new Size(1264, 681);
-            Controls.Add(panelEditor);
-            Controls.Add(panelTools);
-            Name = "GbMaze";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "GbMaze";
-            Load += GbMaze_Load;
-            panelTools.ResumeLayout(false);
-            panelTools.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            panelEditor.ResumeLayout(false);
-            panelEditor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelEditor);
+            this.Controls.Add(this.panelTools);
+            this.Name = "GbMaze";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "GbMaze";
+            this.panelTools.ResumeLayout(false);
+            this.panelTools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panelEditor.ResumeLayout(false);
+            this.panelEditor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -242,5 +245,6 @@
         private TextBox rowsInput;
         private TextBox colsInput;
         private PictureBox pictureBox2;
+        private TextBox seedInput;
     }
 }

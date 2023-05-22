@@ -44,6 +44,7 @@ namespace LabiryntFrontend
         {
             InitializeComponent();
             button3.Enabled = false;
+            button6.Enabled = false;
             Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
             Graphics g = Graphics.FromImage((Image)tB);
 
@@ -549,6 +550,20 @@ namespace LabiryntFrontend
 
                 return pPath;
 
+            }
+        }
+
+        private void seedInput_TextChanged(object sender, EventArgs e)
+        {
+            int seedValue;
+
+            if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646 )
+            {
+                button6.Enabled = true;
+            }
+            else
+            {
+                button6.Enabled = false;
             }
         }
     }
