@@ -45,6 +45,7 @@
             this.panelEditor = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.algorithmsPanel = new System.Windows.Forms.Panel();
+            this.backButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -90,6 +91,7 @@
             this.panelTools.Controls.Add(this.button1);
             this.panelTools.Controls.Add(this.button3);
             this.panelTools.Location = new System.Drawing.Point(0, 0);
+            this.panelTools.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.panelTools.Name = "panelTools";
             this.panelTools.Size = new System.Drawing.Size(1266, 87);
             this.panelTools.TabIndex = 0;
@@ -144,13 +146,19 @@
             // 
             // buttonStart
             // 
+            this.buttonStart.BackColor = System.Drawing.Color.Transparent;
+            this.buttonStart.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonStart.FlatAppearance.BorderSize = 0;
+            this.buttonStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.buttonStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonStart.Location = new System.Drawing.Point(1181, 15);
+            this.buttonStart.Image = global::LabiryntFrontend.Properties.Resources.playButton;
+            this.buttonStart.Location = new System.Drawing.Point(1198, 24);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(60, 60);
+            this.buttonStart.Size = new System.Drawing.Size(42, 39);
             this.buttonStart.TabIndex = 0;
-            this.buttonStart.Text = "START";
-            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.UseVisualStyleBackColor = false;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // button7
@@ -234,7 +242,7 @@
             this.panelEditor.Controls.Add(this.pictureBox1);
             this.panelEditor.Location = new System.Drawing.Point(0, 90);
             this.panelEditor.Name = "panelEditor";
-            this.panelEditor.Size = new System.Drawing.Size(1263, 594);
+            this.panelEditor.Size = new System.Drawing.Size(1259, 591);
             this.panelEditor.TabIndex = 2;
             // 
             // pictureBox1
@@ -251,13 +259,29 @@
             // algorithmsPanel
             // 
             this.algorithmsPanel.BackColor = System.Drawing.Color.Transparent;
+            this.algorithmsPanel.Controls.Add(this.backButton);
             this.algorithmsPanel.Controls.Add(this.panel3);
             this.algorithmsPanel.Controls.Add(this.panel2);
             this.algorithmsPanel.Controls.Add(this.panel1);
             this.algorithmsPanel.Location = new System.Drawing.Point(0, 90);
             this.algorithmsPanel.Name = "algorithmsPanel";
-            this.algorithmsPanel.Size = new System.Drawing.Size(1263, 594);
+            this.algorithmsPanel.Size = new System.Drawing.Size(1263, 592);
             this.algorithmsPanel.TabIndex = 1;
+            // 
+            // backButton
+            // 
+            this.backButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
+            this.backButton.FlatAppearance.BorderSize = 0;
+            this.backButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSlateGray;
+            this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSlateGray;
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.Image = global::LabiryntFrontend.Properties.Resources.backButton;
+            this.backButton.Location = new System.Drawing.Point(8, 0);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(43, 41);
+            this.backButton.TabIndex = 2;
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // panel3
             // 
@@ -414,15 +438,17 @@
             this.algorithm1Button.TabIndex = 0;
             this.algorithm1Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.algorithm1Button.UseVisualStyleBackColor = false;
+            this.algorithm1Button.Click += new System.EventHandler(this.algorithm1Button_Click);
             // 
             // mainPanel
             // 
             this.mainPanel.Controls.Add(this.panelTools);
-            this.mainPanel.Controls.Add(this.panelEditor);
             this.mainPanel.Controls.Add(this.algorithmsPanel);
+            this.mainPanel.Controls.Add(this.panelEditor);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1280, 720);
+            this.mainPanel.Size = new System.Drawing.Size(1263, 682);
             this.mainPanel.TabIndex = 1;
             // 
             // GbMaze
@@ -491,5 +517,6 @@
         private Label label4;
         private CheckBox isRandom;
         private Panel mainPanel;
+        private Button backButton;
     }
 }

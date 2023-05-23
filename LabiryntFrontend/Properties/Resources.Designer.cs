@@ -103,6 +103,16 @@ namespace LabiryntFrontend.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backButton {
+            get {
+                object obj = ResourceManager.GetObject("backButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap generate {
             get {
                 object obj = ResourceManager.GetObject("generate", resourceCulture);
@@ -146,6 +156,16 @@ namespace LabiryntFrontend.Properties {
         internal static System.Drawing.Bitmap passwordicon {
             get {
                 object obj = ResourceManager.GetObject("passwordicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap playButton {
+            get {
+                object obj = ResourceManager.GetObject("playButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -226,6 +246,16 @@ namespace LabiryntFrontend.Properties {
         internal static System.Drawing.Bitmap startButton2 {
             get {
                 object obj = ResourceManager.GetObject("startButton2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap startButton3 {
+            get {
+                object obj = ResourceManager.GetObject("startButton3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

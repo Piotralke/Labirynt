@@ -25,8 +25,9 @@ namespace LabiryntFrontend
         private const int cellSize = 20; // rozmiar pojedynczej komórki
         private int rows = 10; // ilość wierszy
         private int cols = 10; // ilość kolumn
-
+        List<Panel> panelList = new List<Panel>();
         int seedValue = 0;
+
 
         Stack s_stack;
         Random r;
@@ -41,7 +42,10 @@ namespace LabiryntFrontend
             button3.Enabled = false;
             button6.Enabled = false;
             isRandom.Checked = false;
-           
+            buttonStart.Enabled = false;
+            panelList.Add(panelEditor);
+            panelList.Add(algorithmsPanel);
+            
             Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
             Graphics g = Graphics.FromImage((Image)tB);
 
@@ -56,34 +60,10 @@ namespace LabiryntFrontend
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            ArrayList solvePath = Solve(0, 0, cols - 1, rows - 1);
 
-            int xSize = pictureBox1.Image.Width / cols;
-            int ySize = pictureBox1.Image.Height / rows;
-
-            int penSize = 5;
-
-            Bitmap tB = new Bitmap(pictureBox1.Image);
-            Pen p = new Pen(Color.Black, penSize);
-            Graphics g = Graphics.FromImage((Image)tB);
-
-            // not time-cosuming, so don't bother to optimize
-            if (solvePath != null)
-                for (int i = 1; i < solvePath.Count; i++)
-                {
-                    cCellPosition u = (cCellPosition)solvePath[i - 1];
-                    cCellPosition t = (cCellPosition)solvePath[i];
-                    g.DrawLine(p,
-                               xSize * u.x + xSize / 2,
-                               ySize * u.y + ySize / 2,
-                               xSize * t.x + xSize / 2,
-                               ySize * t.y + ySize / 2);
-                    pictureBox1.Image = tB;
-                }
-            p.Dispose();
-            g.Dispose();
-
-
+            panelList[1].BringToFront();
+            panelTools.Enabled = false;
+  
 
         }
 
@@ -169,6 +149,7 @@ namespace LabiryntFrontend
                     }
                 }
                 maze_data = newGrid;
+                buttonStart.Enabled = false;
                 // Przerysowanie kontrolki pictureBox1 z nowymi wymiarami
                 Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
                 Graphics g = Graphics.FromImage((Image)tB);
@@ -351,7 +332,9 @@ namespace LabiryntFrontend
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if(isRandom.Checked == true)
+            buttonStart.Enabled = true;
+
+            if (isRandom.Checked == true)
             {
                 Random r = new Random();
                 int randomSeed = r.Next(0, 2147483646);
@@ -585,6 +568,46 @@ namespace LabiryntFrontend
             {
                 seedInput.Enabled = true;
             }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            panelList[0].BringToFront();
+            panelTools.Enabled = true;
+        }
+
+        private void algorithm1Button_Click(object sender, EventArgs e)
+        {
+
+            ArrayList solvePath = Solve(0, 0, cols - 1, rows - 1);
+
+            int xSize = pictureBox1.Image.Width / cols;
+            int ySize = pictureBox1.Image.Height / rows;
+
+            int penSize = 5;
+
+            Bitmap tB = new Bitmap(pictureBox1.Image);
+            Pen p = new Pen(Color.Black, penSize);
+            Graphics g = Graphics.FromImage((Image)tB);
+
+            // not time-cosuming, so don't bother to optimize
+            if (solvePath != null)
+                for (int i = 1; i < solvePath.Count; i++)
+                {
+                    cCellPosition u = (cCellPosition)solvePath[i - 1];
+                    cCellPosition t = (cCellPosition)solvePath[i];
+                    g.DrawLine(p,
+                               xSize * u.x + xSize / 2,
+                               ySize * u.y + ySize / 2,
+                               xSize * t.x + xSize / 2,
+                               ySize * t.y + ySize / 2);
+                    pictureBox1.Image = tB;
+                }
+            p.Dispose();
+            g.Dispose();
+            panelList[0].BringToFront();
+            panelTools.Enabled = true;
+
         }
     }
     public class cMazeState
