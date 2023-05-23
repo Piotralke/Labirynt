@@ -26,12 +26,7 @@ namespace LabiryntFrontend
         private int rows = 10; // ilość wierszy
         private int cols = 10; // ilość kolumn
 
-        private bool[,] grid = new bool[10, 10]; // tablica dwuwymiarowa przechowująca wartości komórek
-
-        private bool isDrawing = false; // zmienna logiczna określająca, czy użytkownik aktualnie rysuje
-        private int currentRow = -1; // numer wiersza aktualnie rysowanej komórki
-        private int currentCol = -1; // numer kolumny aktualnie rysowanej komórki
-        private bool isWall = true;
+        int seedValue = 0;
 
         Stack s_stack;
         Random r;
@@ -45,6 +40,8 @@ namespace LabiryntFrontend
             InitializeComponent();
             button3.Enabled = false;
             button6.Enabled = false;
+            isRandom.Checked = false;
+           
             Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
             Graphics g = Graphics.FromImage((Image)tB);
 
@@ -118,13 +115,13 @@ namespace LabiryntFrontend
 
         private void button1_Click(object sender, EventArgs e)
         {
-            isWall = true;
+            
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            isWall = false;
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -164,9 +161,9 @@ namespace LabiryntFrontend
 
                 // Resetowanie tablicy grid do nowych wymiarów
                 byte[,] newGrid = new byte[cols, rows];
-                for (int i = 0; i < rows; i++)
+                for (int i = 0; i < cols; i++)
                 {
-                    for (int j = 0; j < cols; j++)
+                    for (int j = 0; j < rows; j++)
                     {
                         newGrid[i, j] = 3;
                     }
@@ -354,8 +351,19 @@ namespace LabiryntFrontend
 
         private void button6_Click(object sender, EventArgs e)
         {
-            GenerateMaze(cols, rows, 0);
-            pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+            if(isRandom.Checked == true)
+            {
+                Random r = new Random();
+                int randomSeed = r.Next(0, 2147483646);
+                GenerateMaze(cols, rows, randomSeed);
+                pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+            }
+            else
+            {
+                GenerateMaze(cols, rows, seedValue);
+                pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+            }
+            
             //pictureBox1.Invalidate();
         }
 
@@ -555,15 +563,27 @@ namespace LabiryntFrontend
 
         private void seedInput_TextChanged(object sender, EventArgs e)
         {
-            int seedValue;
-
-            if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646)
+            
+            if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646 )
             {
                 button6.Enabled = true;
             }
             else
             {
                 button6.Enabled = false;
+            }
+        }
+
+        private void isRandom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isRandom.Checked == true)
+            {
+                seedInput.Enabled = false;
+                button6.Enabled = true;
+            }
+            else
+            {
+                seedInput.Enabled = true;
             }
         }
     }
