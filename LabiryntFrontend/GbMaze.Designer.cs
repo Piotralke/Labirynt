@@ -136,13 +136,13 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::LabiryntFrontend.Properties.Resources.logo;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(164, 63);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            pictureBox2.Image = Properties.Resources.logo;
+            pictureBox2.Location = new Point(12, 12);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(164, 63);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
             // 
             // buttonStart
             // 
@@ -163,12 +163,12 @@
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button7.Location = new System.Drawing.Point(966, 14);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(60, 60);
-            this.button7.TabIndex = 0;
-            this.button7.UseVisualStyleBackColor = true;
+            button7.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            button7.Location = new Point(966, 14);
+            button7.Name = "button7";
+            button7.Size = new Size(60, 60);
+            button7.TabIndex = 0;
+            button7.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
@@ -183,43 +183,43 @@
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button5.Image = global::LabiryntFrontend.Properties.Resources.removeAll;
-            this.button5.Location = new System.Drawing.Point(569, 16);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(60, 60);
-            this.button5.TabIndex = 0;
-            this.button5.UseVisualStyleBackColor = true;
+            button5.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            button5.Image = Properties.Resources.removeAll;
+            button5.Location = new Point(569, 16);
+            button5.Name = "button5";
+            button5.Size = new Size(60, 60);
+            button5.TabIndex = 0;
+            button5.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Image = global::LabiryntFrontend.Properties.Resources.addAll;
-            this.button4.Location = new System.Drawing.Point(503, 17);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(60, 60);
-            this.button4.TabIndex = 0;
-            this.button4.UseVisualStyleBackColor = true;
+            button4.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            button4.Image = Properties.Resources.addAll;
+            button4.Location = new Point(503, 17);
+            button4.Name = "button4";
+            button4.Size = new Size(60, 60);
+            button4.TabIndex = 0;
+            button4.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Image = global::LabiryntFrontend.Properties.Resources.removeWall;
-            this.button2.Location = new System.Drawing.Point(428, 17);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 60);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = true;
+            button2.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.Image = Properties.Resources.removeWall;
+            button2.Location = new Point(428, 17);
+            button2.Name = "button2";
+            button2.Size = new Size(60, 60);
+            button2.TabIndex = 0;
+            button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Image = global::LabiryntFrontend.Properties.Resources.addWall;
-            this.button1.Location = new System.Drawing.Point(362, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 60);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Image = Properties.Resources.addWall;
+            button1.Location = new Point(362, 16);
+            button1.Name = "button1";
+            button1.Size = new Size(60, 60);
+            button1.TabIndex = 0;
+            button1.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
