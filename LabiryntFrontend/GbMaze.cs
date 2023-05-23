@@ -557,7 +557,7 @@ namespace LabiryntFrontend
         {
             int seedValue;
 
-            if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646 )
+            if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646)
             {
                 button6.Enabled = true;
             }
