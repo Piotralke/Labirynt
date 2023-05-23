@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.panelTools = new System.Windows.Forms.Panel();
+            this.isRandom = new System.Windows.Forms.CheckBox();
             this.seedInput = new System.Windows.Forms.TextBox();
-            this.panelEditor = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.rowsInput = new System.Windows.Forms.TextBox();
             this.colsInput = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -43,6 +42,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.panelEditor = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.algorithmsPanel = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -53,14 +54,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.algorithm3Button = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.algorithm1Button = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.panelTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.algorithmsPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -68,13 +70,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTools
             // 
             this.panelTools.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelTools.Controls.Add(this.isRandom);
             this.panelTools.Controls.Add(this.seedInput);
-            this.panelTools.Controls.Add(this.panelEditor);
             this.panelTools.Controls.Add(this.rowsInput);
             this.panelTools.Controls.Add(this.colsInput);
             this.panelTools.Controls.Add(this.pictureBox2);
@@ -91,38 +94,25 @@
             this.panelTools.Size = new System.Drawing.Size(1266, 87);
             this.panelTools.TabIndex = 0;
             // 
+            // isRandom
+            // 
+            this.isRandom.AutoSize = true;
+            this.isRandom.Location = new System.Drawing.Point(635, 52);
+            this.isRandom.Name = "isRandom";
+            this.isRandom.Size = new System.Drawing.Size(95, 19);
+            this.isRandom.TabIndex = 5;
+            this.isRandom.Text = "random seed";
+            this.isRandom.UseVisualStyleBackColor = true;
+            this.isRandom.CheckedChanged += new System.EventHandler(this.isRandom_CheckedChanged);
+            // 
             // seedInput
             // 
-            this.seedInput.Location = new System.Drawing.Point(635, 35);
+            this.seedInput.Location = new System.Drawing.Point(635, 17);
             this.seedInput.Name = "seedInput";
             this.seedInput.PlaceholderText = "seed";
-            this.seedInput.Size = new System.Drawing.Size(73, 23);
+            this.seedInput.Size = new System.Drawing.Size(93, 23);
             this.seedInput.TabIndex = 4;
             this.seedInput.TextChanged += new System.EventHandler(this.seedInput_TextChanged);
-            // 
-            // panelEditor
-            // 
-            this.panelEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelEditor.AutoScroll = true;
-            this.panelEditor.BackColor = System.Drawing.Color.Transparent;
-            this.panelEditor.Controls.Add(this.pictureBox1);
-            this.panelEditor.Location = new System.Drawing.Point(0, 81);
-            this.panelEditor.Name = "panelEditor";
-            this.panelEditor.Size = new System.Drawing.Size(1263, 594);
-            this.panelEditor.TabIndex = 2;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(891, 485);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // rowsInput
             // 
@@ -176,7 +166,7 @@
             // 
             this.button6.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button6.Image = global::LabiryntFrontend.Properties.Resources.generate;
-            this.button6.Location = new System.Drawing.Point(714, 17);
+            this.button6.Location = new System.Drawing.Point(734, 17);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(60, 60);
             this.button6.TabIndex = 0;
@@ -234,13 +224,37 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // panelEditor
+            // 
+            this.panelEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEditor.AutoScroll = true;
+            this.panelEditor.BackColor = System.Drawing.Color.Transparent;
+            this.panelEditor.Controls.Add(this.pictureBox1);
+            this.panelEditor.Location = new System.Drawing.Point(0, 90);
+            this.panelEditor.Name = "panelEditor";
+            this.panelEditor.Size = new System.Drawing.Size(1263, 594);
+            this.panelEditor.TabIndex = 2;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(891, 485);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // algorithmsPanel
             // 
             this.algorithmsPanel.BackColor = System.Drawing.Color.Transparent;
             this.algorithmsPanel.Controls.Add(this.panel3);
             this.algorithmsPanel.Controls.Add(this.panel2);
             this.algorithmsPanel.Controls.Add(this.panel1);
-            this.algorithmsPanel.Location = new System.Drawing.Point(0, 87);
+            this.algorithmsPanel.Location = new System.Drawing.Point(0, 90);
             this.algorithmsPanel.Name = "algorithmsPanel";
             this.algorithmsPanel.Size = new System.Drawing.Size(1263, 594);
             this.algorithmsPanel.TabIndex = 1;
@@ -353,6 +367,17 @@
             this.panel1.Size = new System.Drawing.Size(307, 494);
             this.panel1.TabIndex = 0;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
+            this.label4.Location = new System.Drawing.Point(23, 270);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(126, 14);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "tu opis algorytmu";
+            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::LabiryntFrontend.Properties.Resources.algorithmIMG1;
@@ -390,16 +415,15 @@
             this.algorithm1Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.algorithm1Button.UseVisualStyleBackColor = false;
             // 
-            // label4
+            // mainPanel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
-            this.label4.Location = new System.Drawing.Point(23, 270);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(126, 14);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "tu opis algorytmu";
+            this.mainPanel.Controls.Add(this.panelTools);
+            this.mainPanel.Controls.Add(this.panelEditor);
+            this.mainPanel.Controls.Add(this.algorithmsPanel);
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(1280, 720);
+            this.mainPanel.TabIndex = 1;
             // 
             // GbMaze
             // 
@@ -409,17 +433,16 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.algorithmsPanel);
-            this.Controls.Add(this.panelTools);
+            this.Controls.Add(this.mainPanel);
             this.Name = "GbMaze";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GbMaze";
             this.panelTools.ResumeLayout(false);
             this.panelTools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelEditor.ResumeLayout(false);
             this.panelEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.algorithmsPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -430,6 +453,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -465,5 +489,7 @@
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
         private Label label4;
+        private CheckBox isRandom;
+        private Panel mainPanel;
     }
 }

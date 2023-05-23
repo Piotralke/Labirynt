@@ -40,6 +40,8 @@ namespace LabiryntFrontend
             InitializeComponent();
             button3.Enabled = false;
             button6.Enabled = false;
+            isRandom.Checked = false;
+           
             Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
             Graphics g = Graphics.FromImage((Image)tB);
 
@@ -349,8 +351,19 @@ namespace LabiryntFrontend
 
         private void button6_Click(object sender, EventArgs e)
         {
-            GenerateMaze(cols, rows, seedValue);
-            pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+            if(isRandom.Checked == true)
+            {
+                Random r = new Random();
+                int randomSeed = r.Next(0, 2147483646);
+                GenerateMaze(cols, rows, randomSeed);
+                pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+            }
+            else
+            {
+                GenerateMaze(cols, rows, seedValue);
+                pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+            }
+            
             //pictureBox1.Invalidate();
         }
 
@@ -558,6 +571,19 @@ namespace LabiryntFrontend
             else
             {
                 button6.Enabled = false;
+            }
+        }
+
+        private void isRandom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isRandom.Checked == true)
+            {
+                seedInput.Enabled = false;
+                button6.Enabled = true;
+            }
+            else
+            {
+                seedInput.Enabled = true;
             }
         }
     }
