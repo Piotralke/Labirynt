@@ -10,7 +10,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
+
 
 namespace LabiryntFrontend
 {
@@ -420,7 +423,7 @@ namespace LabiryntFrontend
             // zabezpieczenia
             if (maze_data == null) return null;
             if (xSource == xDest && ySource == yDest) return calcState;
-
+            
             while (destReached == false && calcState.Count > 0)
             {
                 step++;
@@ -485,7 +488,8 @@ namespace LabiryntFrontend
                 tMazePath[xDest, yDest] = step;
                 // buduj drog przez tMazePath
                 ArrayList pPath = new ArrayList();
-
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 int tx = xDest;
                 int ty = yDest;
 
@@ -538,9 +542,153 @@ namespace LabiryntFrontend
 
                     if (stepExists == false) return null;
                 }
-
+                stopwatch.Stop();
+                Debug.WriteLine(stopwatch.Elapsed);
                 return pPath;
 
+            }
+        }
+        public ArrayList SolveBFS(int xSource, int ySource, int xDest, int yDest)
+        {
+            int[,] tMazePath = new int[cols, rows];
+            bool destReached = false;
+
+            cCellPosition cellPos = new cCellPosition(xSource, ySource);
+            Queue<cCellPosition> queue = new Queue<cCellPosition>();
+
+            // Przygotowanie do rozpoczęcia
+            queue.Enqueue(cellPos);
+            for (int i = 0; i < cols; i++)
+                for (int j = 0; j < rows; j++)
+                    tMazePath[i, j] = -1;
+            tMazePath[xSource, ySource] = 0;
+
+            // Zabezpieczenia
+            if (maze_data == null) return null;
+            if (xSource == xDest && ySource == yDest) return new ArrayList() { cellPos };
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            while (queue.Count > 0)
+            {
+                cCellPosition currentPos = queue.Dequeue();
+
+                // Sprawdź cztery sąsiadujące kierunki
+                // N
+                if (currentPos.y > 0)
+                    if (tMazePath[currentPos.x, currentPos.y - 1] == -1)
+                        if ((maze_data[currentPos.x, currentPos.y] & (byte)Direction.N) != 0)
+                        {
+                            tMazePath[currentPos.x, currentPos.y - 1] = tMazePath[currentPos.x, currentPos.y] + 1;
+                            cCellPosition nextPos = new cCellPosition(currentPos.x, currentPos.y - 1);
+                            queue.Enqueue(nextPos);
+
+                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            {
+                                destReached = true;
+                                break;
+                            }
+                        }
+                // W
+                if (currentPos.x > 0)
+                    if (tMazePath[currentPos.x - 1, currentPos.y] == -1)
+                        if ((maze_data[currentPos.x, currentPos.y] & (byte)Direction.W) != 0)
+                        {
+                            tMazePath[currentPos.x - 1, currentPos.y] = tMazePath[currentPos.x, currentPos.y] + 1;
+                            cCellPosition nextPos = new cCellPosition(currentPos.x - 1, currentPos.y);
+                            queue.Enqueue(nextPos);
+
+                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            {
+                                destReached = true;
+                                break;
+                            }
+                        }
+                // S
+                if (currentPos.y < rows - 1)
+                    if (tMazePath[currentPos.x, currentPos.y + 1] == -1)
+                        if ((maze_data[currentPos.x, currentPos.y + 1] & (byte)Direction.N) != 0)
+                        {
+                            tMazePath[currentPos.x, currentPos.y + 1] = tMazePath[currentPos.x, currentPos.y] + 1;
+                            cCellPosition nextPos = new cCellPosition(currentPos.x, currentPos.y + 1);
+                            queue.Enqueue(nextPos);
+
+                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            {
+                                destReached = true;
+                                break;
+                            }
+                        }
+                // E
+                if (currentPos.x < cols - 1)
+                    if (tMazePath[currentPos.x + 1, currentPos.y] == -1)
+                        if ((maze_data[currentPos.x + 1, currentPos.y] & (byte)Direction.W) != 0)
+                        {
+                            tMazePath[currentPos.x + 1, currentPos.y] = tMazePath[currentPos.x, currentPos.y] + 1;
+                            cCellPosition nextPos = new cCellPosition(currentPos.x + 1, currentPos.y);
+                            queue.Enqueue(nextPos);
+
+                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            {
+                                destReached = true;
+                                break;
+                            }
+                        }
+            }
+
+            // Możliwe są dwa warianty:
+            if (destReached == false)
+            {
+                return null;
+            }
+            else
+            {
+                // Buduj drogę przez tMazePath
+                ArrayList pPath = new ArrayList();
+
+                int tx = xDest;
+                int ty = yDest;
+
+                pPath.Add(new cCellPosition(tx, ty));
+
+                while (tx != xSource || ty != ySource)
+                {
+                    int step = tMazePath[tx, ty];
+
+                    // Szukaj kroku
+                    // N
+                    if (ty > 0)
+                        if (tMazePath[tx, ty - 1] == step - 1 && (maze_data[tx, ty] & (byte)Direction.N) != 0)
+                        {
+                            ty -= 1;
+                            pPath.Add(new cCellPosition(tx, ty));
+                        }
+                    // W
+                    if (tx > 0)
+                        if (tMazePath[tx - 1, ty] == step - 1 && (maze_data[tx, ty] & (byte)Direction.W) != 0)
+                        {
+                            tx -= 1;
+                            pPath.Add(new cCellPosition(tx, ty));
+                        }
+                    // S
+                    if (ty < rows - 1)
+                        if (tMazePath[tx, ty + 1] == step - 1 && (maze_data[tx, ty + 1] & (byte)Direction.N) != 0)
+                        {
+                            ty += 1;
+                            pPath.Add(new cCellPosition(tx, ty));
+                        }
+                    // E
+                    if (tx < cols - 1)
+                        if (tMazePath[tx + 1, ty] == step - 1 && (maze_data[tx + 1, ty] & (byte)Direction.W) != 0)
+                        {
+                            tx += 1;
+                            pPath.Add(new cCellPosition(tx, ty));
+                        }
+                }
+
+                pPath.Reverse();
+                stopwatch.Stop();
+                Debug.WriteLine(stopwatch.Elapsed);
+                return pPath;
             }
         }
 
@@ -590,6 +738,38 @@ namespace LabiryntFrontend
             Pen p = new Pen(Color.Black, penSize);
             Graphics g = Graphics.FromImage((Image)tB);
 
+            // not time-cosuming, so don't bother to optimize
+            if (solvePath != null)
+                for (int i = 1; i < solvePath.Count; i++)
+                {
+                    cCellPosition u = (cCellPosition)solvePath[i - 1];
+                    cCellPosition t = (cCellPosition)solvePath[i];
+                    g.DrawLine(p,
+                               xSize * u.x + xSize / 2,
+                               ySize * u.y + ySize / 2,
+                               xSize * t.x + xSize / 2,
+                               ySize * t.y + ySize / 2);
+                    pictureBox1.Image = tB;
+                }
+            p.Dispose();
+            g.Dispose();
+            panelList[0].BringToFront();
+            panelTools.Enabled = true;
+
+        }
+
+        private void algorithm2Button_Click(object sender, EventArgs e)
+        {
+            ArrayList solvePath = SolveBFS(0, 0, cols - 1, rows - 1);
+
+            int xSize = pictureBox1.Image.Width / cols;
+            int ySize = pictureBox1.Image.Height / rows;
+
+            int penSize = 5;
+
+            Bitmap tB = new Bitmap(pictureBox1.Image);
+            Pen p = new Pen(Color.Black, penSize);
+            Graphics g = Graphics.FromImage((Image)tB);
             // not time-cosuming, so don't bother to optimize
             if (solvePath != null)
                 for (int i = 1; i < solvePath.Count; i++)
