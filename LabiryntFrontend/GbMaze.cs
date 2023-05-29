@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.AxHost;
 
 
@@ -24,13 +25,13 @@ namespace LabiryntFrontend
             N = 1,
             W = 2
         }
-
+        
         private const int cellSize = 20; // rozmiar pojedynczej komórki
         private int rows = 10; // ilość wierszy
         private int cols = 10; // ilość kolumn
         List<Panel> panelList = new List<Panel>();
         int seedValue = 0;
-
+        public PictureBox storedMaze = new PictureBox();
 
         Stack s_stack;
         Random r;
@@ -48,7 +49,7 @@ namespace LabiryntFrontend
             buttonStart.Enabled = false;
             panelList.Add(panelEditor);
             panelList.Add(algorithmsPanel);
-            
+            this.Controls.Add(storedMaze);
             Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
             Graphics g = Graphics.FromImage((Image)tB);
 
@@ -343,11 +344,13 @@ namespace LabiryntFrontend
                 int randomSeed = r.Next(0, 2147483646);
                 GenerateMaze(cols, rows, randomSeed);
                 pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+                storedMaze.Image = pictureBox1.Image;
             }
             else
             {
                 GenerateMaze(cols, rows, seedValue);
                 pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+                storedMaze.Image = pictureBox1.Image;
             }
             
             //pictureBox1.Invalidate();
@@ -367,9 +370,11 @@ namespace LabiryntFrontend
             Brush w = Brushes.LightGray;
             Brush r = Brushes.Black;
             Brush b = Brushes.Green;
+            Brush bl = Brushes.Blue;
 
             Pen bp = new Pen(b, 2);
             Pen rp = new Pen(r, 2);
+            Pen bluePen = new Pen(bl, 2);
 
             // background
             g.FillRectangle(w, 0, 0, tB.Width - 1, tB.Height - 1);
@@ -390,24 +395,19 @@ namespace LabiryntFrontend
                         g.DrawLine(bp,
                             new Point(xSize * i, ySize * j),
                             new Point(xSize * i, ySize * (j + 1)));
-
+                    
                 }
-
-            // start & end
-            g.DrawLine(rp, 0, 0, xSize, 0);
-            g.DrawLine(rp, 0, 0, 0, xSize);
-            g.DrawLine(rp, xS, yS, xS - xSize, yS);
-            g.DrawLine(rp, xS, yS, xS, yS - ySize);
+          
 
             g.Dispose();
 
             return tB;
         }
-        public ArrayList Solve(int xSource, int ySource, int xDest, int yDest)
+        public ArrayList Solve(int xSource, int ySource, ArrayList exitCoords)
         {
             int[,] tMazePath = new int[cols, rows];
             bool destReached = false;
-
+            exitCoords exitReached = new exitCoords();
             cCellPosition cellPos = new cCellPosition(xSource, ySource);
             ArrayList calcState = new ArrayList();
 
@@ -422,7 +422,11 @@ namespace LabiryntFrontend
 
             // zabezpieczenia
             if (maze_data == null) return null;
-            if (xSource == xDest && ySource == yDest) return calcState;
+            foreach(exitCoords cords in exitCoords)
+            {
+                if (xSource == cords.x && ySource == cords.y) return calcState;
+            }
+            
             
             while (destReached == false && calcState.Count > 0)
             {
@@ -441,8 +445,16 @@ namespace LabiryntFrontend
                                 tMazePath[calcCPos.x, calcCPos.y - 1] = step;
                                 cCellPosition calcNextCPos = new cCellPosition(calcCPos.x, calcCPos.y - 1);
                                 calcNextState.Add(calcNextCPos);
+                                foreach(exitCoords coords in exitCoords)
+                                {
 
-                                if (calcNextCPos.x == xDest && calcNextCPos.y == yDest) destReached = true;
+                                    if (calcNextCPos.x == coords.x && calcNextCPos.y == coords.y)
+                                    {
+                                        exitReached.x = coords.x;
+                                        exitReached.y = coords.y;
+                                        destReached = true; 
+                                    }
+                                }
                             }
                     // W
                     if (calcCPos.x > 0) // tylko jesli w zakresie
@@ -452,8 +464,16 @@ namespace LabiryntFrontend
                                 tMazePath[calcCPos.x - 1, calcCPos.y] = step;
                                 cCellPosition calcNextCPos = new cCellPosition(calcCPos.x - 1, calcCPos.y);
                                 calcNextState.Add(calcNextCPos);
+                                foreach (exitCoords coords in exitCoords)
+                                {
 
-                                if (calcNextCPos.x == xDest && calcNextCPos.y == yDest) destReached = true;
+                                    if (calcNextCPos.x == coords.x && calcNextCPos.y == coords.y)
+                                    {
+                                        exitReached.x = coords.x;
+                                        exitReached.y = coords.y;
+                                        destReached = true;
+                                    }
+                                }
                             }
                     // S
                     if (calcCPos.y < rows - 1) // tylko jesli w zakresie
@@ -464,7 +484,16 @@ namespace LabiryntFrontend
                                 cCellPosition calcNextCPos = new cCellPosition(calcCPos.x, calcCPos.y + 1);
                                 calcNextState.Add(calcNextCPos);
 
-                                if (calcNextCPos.x == xDest && calcNextCPos.y == yDest) destReached = true;
+                                foreach (exitCoords coords in exitCoords)
+                                {
+
+                                    if (calcNextCPos.x == coords.x && calcNextCPos.y == coords.y)
+                                    {
+                                        exitReached.x = coords.x;
+                                        exitReached.y = coords.y;
+                                        destReached = true;
+                                    }
+                                }
                             }
                     // E
                     if (calcCPos.x < cols - 1) // tylko jesli w zakresie
@@ -475,7 +504,16 @@ namespace LabiryntFrontend
                                 cCellPosition calcNextCPos = new cCellPosition(calcCPos.x + 1, calcCPos.y);
                                 calcNextState.Add(calcNextCPos);
 
-                                if (calcNextCPos.x == xDest && calcNextCPos.y == yDest) destReached = true;
+                                foreach (exitCoords coords in exitCoords)
+                                {
+
+                                    if (calcNextCPos.x == coords.x && calcNextCPos.y == coords.y)
+                                    {
+                                        exitReached.x = coords.x;
+                                        exitReached.y = coords.y;
+                                        destReached = true;
+                                    }
+                                }
                             }
                 }
                 calcState = calcNextState;
@@ -485,13 +523,13 @@ namespace LabiryntFrontend
                 return null;
             else
             {
-                tMazePath[xDest, yDest] = step;
+                tMazePath[exitReached.x, exitReached.y] = step;
                 // buduj drog przez tMazePath
                 ArrayList pPath = new ArrayList();
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
-                int tx = xDest;
-                int ty = yDest;
+                int tx = exitReached.x;
+                int ty = exitReached.y;
 
                 pPath.Add(new cCellPosition(tx, ty));
 
@@ -548,11 +586,11 @@ namespace LabiryntFrontend
 
             }
         }
-        public ArrayList SolveBFS(int xSource, int ySource, int xDest, int yDest)
+        public ArrayList SolveBFS(int xSource, int ySource, ArrayList exitCoords)
         {
             int[,] tMazePath = new int[cols, rows];
             bool destReached = false;
-
+            exitCoords exitReached = new exitCoords();
             cCellPosition cellPos = new cCellPosition(xSource, ySource);
             Queue<cCellPosition> queue = new Queue<cCellPosition>();
 
@@ -565,7 +603,11 @@ namespace LabiryntFrontend
 
             // Zabezpieczenia
             if (maze_data == null) return null;
-            if (xSource == xDest && ySource == yDest) return new ArrayList() { cellPos };
+            foreach(exitCoords cords in exitCoords)
+            {
+
+                if (xSource == cords.x && ySource == cords.y) return new ArrayList() { cellPos };
+            }
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             while (queue.Count > 0)
@@ -581,12 +623,17 @@ namespace LabiryntFrontend
                             tMazePath[currentPos.x, currentPos.y - 1] = tMazePath[currentPos.x, currentPos.y] + 1;
                             cCellPosition nextPos = new cCellPosition(currentPos.x, currentPos.y - 1);
                             queue.Enqueue(nextPos);
-
-                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            foreach (exitCoords cords in exitCoords)
                             {
-                                destReached = true;
-                                break;
+                                if (nextPos.x == cords.x && nextPos.y == cords.y)
+                                {
+                                    exitReached.x = cords.x;
+                                    exitReached.y = cords.y;
+                                    destReached = true;
+                                    break;
+                                }
                             }
+                                
                         }
                 // W
                 if (currentPos.x > 0)
@@ -596,11 +643,15 @@ namespace LabiryntFrontend
                             tMazePath[currentPos.x - 1, currentPos.y] = tMazePath[currentPos.x, currentPos.y] + 1;
                             cCellPosition nextPos = new cCellPosition(currentPos.x - 1, currentPos.y);
                             queue.Enqueue(nextPos);
-
-                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            foreach (exitCoords cords in exitCoords)
                             {
-                                destReached = true;
-                                break;
+                                if (nextPos.x == cords.x && nextPos.y == cords.y)
+                                {
+                                    exitReached.x = cords.x;
+                                    exitReached.y = cords.y;
+                                    destReached = true;
+                                    break;
+                                }
                             }
                         }
                 // S
@@ -611,11 +662,15 @@ namespace LabiryntFrontend
                             tMazePath[currentPos.x, currentPos.y + 1] = tMazePath[currentPos.x, currentPos.y] + 1;
                             cCellPosition nextPos = new cCellPosition(currentPos.x, currentPos.y + 1);
                             queue.Enqueue(nextPos);
-
-                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            foreach (exitCoords cords in exitCoords)
                             {
-                                destReached = true;
-                                break;
+                                if (nextPos.x == cords.x && nextPos.y == cords.y)
+                                {
+                                    exitReached.x = cords.x;
+                                    exitReached.y = cords.y;
+                                    destReached = true;
+                                    break;
+                                }
                             }
                         }
                 // E
@@ -627,10 +682,15 @@ namespace LabiryntFrontend
                             cCellPosition nextPos = new cCellPosition(currentPos.x + 1, currentPos.y);
                             queue.Enqueue(nextPos);
 
-                            if (nextPos.x == xDest && nextPos.y == yDest)
+                            foreach (exitCoords cords in exitCoords)
                             {
-                                destReached = true;
-                                break;
+                                if (nextPos.x == cords.x && nextPos.y == cords.y)
+                                {
+                                    exitReached.x = cords.x;
+                                    exitReached.y = cords.y;
+                                    destReached = true;
+                                    break;
+                                }
                             }
                         }
             }
@@ -645,8 +705,8 @@ namespace LabiryntFrontend
                 // Buduj drogę przez tMazePath
                 ArrayList pPath = new ArrayList();
 
-                int tx = xDest;
-                int ty = yDest;
+                int tx = exitReached.x;
+                int ty = exitReached.y;
 
                 pPath.Add(new cCellPosition(tx, ty));
 
@@ -726,67 +786,103 @@ namespace LabiryntFrontend
 
         private void algorithm1Button_Click(object sender, EventArgs e)
         {
+            parametrForm form = new parametrForm(cols,rows);
+            
+            
+            if(form.ShowDialog() == DialogResult.OK)
+            {
+                ArrayList exits = form.exitTable;
+                int startX = form.startX;
+                int startY = form.startY;
 
-            ArrayList solvePath = Solve(0, 0, cols - 1, rows - 1);
+                ArrayList solvePath = Solve(startX,startY, exits);
 
-            int xSize = pictureBox1.Image.Width / cols;
-            int ySize = pictureBox1.Image.Height / rows;
+                int xSize = pictureBox1.Image.Width / cols;
+                int ySize = pictureBox1.Image.Height / rows;
+                
+                int penSize = 5;
 
-            int penSize = 5;
-
-            Bitmap tB = new Bitmap(pictureBox1.Image);
-            Pen p = new Pen(Color.Black, penSize);
-            Graphics g = Graphics.FromImage((Image)tB);
-
-            // not time-cosuming, so don't bother to optimize
-            if (solvePath != null)
-                for (int i = 1; i < solvePath.Count; i++)
+                Bitmap tB = new Bitmap(storedMaze.Image);
+                Pen p = new Pen(Color.Black, penSize);
+                Graphics g = Graphics.FromImage((Image)tB);
+                Pen b = new Pen(Color.Blue, penSize);
+                Pen r = new Pen(Color.Red, penSize);
+                // not time-cosuming, so don't bother to optimize
+                if (solvePath != null)
                 {
-                    cCellPosition u = (cCellPosition)solvePath[i - 1];
-                    cCellPosition t = (cCellPosition)solvePath[i];
-                    g.DrawLine(p,
-                               xSize * u.x + xSize / 2,
-                               ySize * u.y + ySize / 2,
-                               xSize * t.x + xSize / 2,
-                               ySize * t.y + ySize / 2);
-                    pictureBox1.Image = tB;
+                    for (int i = 1; i < solvePath.Count; i++)
+                    {
+                        cCellPosition u = (cCellPosition)solvePath[i - 1];
+                        cCellPosition t = (cCellPosition)solvePath[i];
+                        g.DrawLine(p,
+                                   xSize * u.x + xSize / 2,
+                                   ySize * u.y + ySize / 2,
+                                   xSize * t.x + xSize / 2,
+                                   ySize * t.y + ySize / 2);
+                        pictureBox1.Image = tB;
+                    }
+                    g.DrawEllipse(b, startX * xSize , startY * ySize , xSize , ySize );
+                    foreach (exitCoords cords in exits)
+                    {
+                        g.DrawEllipse(r, cords.x * xSize, cords.y * ySize, xSize, ySize);
+                    }
+                    
                 }
-            p.Dispose();
-            g.Dispose();
-            panelList[0].BringToFront();
-            panelTools.Enabled = true;
+                    
+                p.Dispose();
+                g.Dispose();
+                panelList[0].BringToFront();
+                panelTools.Enabled = true;
+            }
+            
 
         }
 
         private void algorithm2Button_Click(object sender, EventArgs e)
         {
-            ArrayList solvePath = SolveBFS(0, 0, cols - 1, rows - 1);
+            parametrForm form = new parametrForm(cols, rows);
+            
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ArrayList exits = form.exitTable;
+                int startX = form.startX;
+                int startY = form.startY;
+                ArrayList solvePath = SolveBFS(startX, startY, exits);
+                int xSize = pictureBox1.Image.Width / cols;
+                int ySize = pictureBox1.Image.Height / rows;
 
-            int xSize = pictureBox1.Image.Width / cols;
-            int ySize = pictureBox1.Image.Height / rows;
+                int penSize = 5;
 
-            int penSize = 5;
-
-            Bitmap tB = new Bitmap(pictureBox1.Image);
-            Pen p = new Pen(Color.Black, penSize);
-            Graphics g = Graphics.FromImage((Image)tB);
-            // not time-cosuming, so don't bother to optimize
-            if (solvePath != null)
-                for (int i = 1; i < solvePath.Count; i++)
+                Bitmap tB = new Bitmap(storedMaze.Image);
+                Pen p = new Pen(Color.Black, penSize);
+                Pen b = new Pen(Color.Blue, penSize);
+                Pen r = new Pen(Color.Red, penSize);
+                Graphics g = Graphics.FromImage((Image)tB);
+                // not time-cosuming, so don't bother to optimize
+                if (solvePath != null)
+                    for (int i = 1; i < solvePath.Count; i++)
+                    {
+                        cCellPosition u = (cCellPosition)solvePath[i - 1];
+                        cCellPosition t = (cCellPosition)solvePath[i];
+                        g.DrawLine(p,
+                                   xSize * u.x + xSize / 2,
+                                   ySize * u.y + ySize / 2,
+                                   xSize * t.x + xSize / 2,
+                                   ySize * t.y + ySize / 2);
+                        pictureBox1.Image = tB;
+                    }
+                g.DrawEllipse(b, startX * xSize, startY * ySize, xSize, ySize);
+                foreach (exitCoords cords in exits)
                 {
-                    cCellPosition u = (cCellPosition)solvePath[i - 1];
-                    cCellPosition t = (cCellPosition)solvePath[i];
-                    g.DrawLine(p,
-                               xSize * u.x + xSize / 2,
-                               ySize * u.y + ySize / 2,
-                               xSize * t.x + xSize / 2,
-                               ySize * t.y + ySize / 2);
-                    pictureBox1.Image = tB;
+                    g.DrawEllipse(r, cords.x * xSize, cords.y * ySize, xSize, ySize);
                 }
-            p.Dispose();
-            g.Dispose();
-            panelList[0].BringToFront();
-            panelTools.Enabled = true;
+                p.Dispose();
+                g.Dispose();
+                panelList[0].BringToFront();
+                panelTools.Enabled = true;
+            }
+
+            
 
         }
     }

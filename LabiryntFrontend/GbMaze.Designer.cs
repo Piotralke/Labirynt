@@ -55,7 +55,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.algorithm3Button = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.algorithm1Button = new System.Windows.Forms.Button();
@@ -100,7 +99,7 @@
             // 
             this.isRandom.AutoSize = true;
             this.isRandom.Location = new System.Drawing.Point(952, 78);
-            this.isRandom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.isRandom.Margin = new System.Windows.Forms.Padding(4);
             this.isRandom.Name = "isRandom";
             this.isRandom.Size = new System.Drawing.Size(143, 29);
             this.isRandom.TabIndex = 5;
@@ -111,7 +110,7 @@
             // seedInput
             // 
             this.seedInput.Location = new System.Drawing.Point(952, 26);
-            this.seedInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.seedInput.Margin = new System.Windows.Forms.Padding(4);
             this.seedInput.Name = "seedInput";
             this.seedInput.PlaceholderText = "seed";
             this.seedInput.Size = new System.Drawing.Size(138, 31);
@@ -121,7 +120,7 @@
             // rowsInput
             // 
             this.rowsInput.Location = new System.Drawing.Point(328, 78);
-            this.rowsInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rowsInput.Margin = new System.Windows.Forms.Padding(4);
             this.rowsInput.Name = "rowsInput";
             this.rowsInput.PlaceholderText = "rows";
             this.rowsInput.Size = new System.Drawing.Size(91, 31);
@@ -131,7 +130,7 @@
             // colsInput
             // 
             this.colsInput.Location = new System.Drawing.Point(328, 24);
-            this.colsInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.colsInput.Margin = new System.Windows.Forms.Padding(4);
             this.colsInput.Name = "colsInput";
             this.colsInput.PlaceholderText = "cols";
             this.colsInput.Size = new System.Drawing.Size(91, 31);
@@ -142,7 +141,7 @@
             // 
             this.pictureBox2.Image = global::LabiryntFrontend.Properties.Resources.logo;
             this.pictureBox2.Location = new System.Drawing.Point(18, 18);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(246, 94);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -160,7 +159,7 @@
             this.buttonStart.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonStart.Image = global::LabiryntFrontend.Properties.Resources.playButton;
             this.buttonStart.Location = new System.Drawing.Point(1797, 36);
-            this.buttonStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(4);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(63, 58);
             this.buttonStart.TabIndex = 0;
@@ -171,7 +170,7 @@
             // 
             this.button7.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button7.Location = new System.Drawing.Point(1449, 21);
-            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(90, 90);
             this.button7.TabIndex = 0;
@@ -182,7 +181,7 @@
             this.button6.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button6.Image = global::LabiryntFrontend.Properties.Resources.generate;
             this.button6.Location = new System.Drawing.Point(1101, 26);
-            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(90, 90);
             this.button6.TabIndex = 0;
@@ -194,7 +193,7 @@
             this.button5.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button5.Image = global::LabiryntFrontend.Properties.Resources.removeAll;
             this.button5.Location = new System.Drawing.Point(854, 24);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(90, 90);
             this.button5.TabIndex = 0;
@@ -205,7 +204,7 @@
             this.button4.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button4.Image = global::LabiryntFrontend.Properties.Resources.addAll;
             this.button4.Location = new System.Drawing.Point(754, 26);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(90, 90);
             this.button4.TabIndex = 0;
@@ -216,7 +215,7 @@
             this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.Image = global::LabiryntFrontend.Properties.Resources.removeWall;
             this.button2.Location = new System.Drawing.Point(642, 26);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(90, 90);
             this.button2.TabIndex = 0;
@@ -227,7 +226,7 @@
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.Image = global::LabiryntFrontend.Properties.Resources.addWall;
             this.button1.Location = new System.Drawing.Point(543, 24);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 90);
             this.button1.TabIndex = 0;
@@ -238,7 +237,7 @@
             this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button3.Image = global::LabiryntFrontend.Properties.Resources.size2;
             this.button3.Location = new System.Drawing.Point(430, 24);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 90);
             this.button3.TabIndex = 0;
@@ -254,7 +253,7 @@
             this.panelEditor.BackColor = System.Drawing.Color.Transparent;
             this.panelEditor.Controls.Add(this.pictureBox1);
             this.panelEditor.Location = new System.Drawing.Point(0, 135);
-            this.panelEditor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelEditor.Margin = new System.Windows.Forms.Padding(4);
             this.panelEditor.Name = "panelEditor";
             this.panelEditor.Size = new System.Drawing.Size(1888, 886);
             this.panelEditor.TabIndex = 2;
@@ -264,7 +263,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(12, 9);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(891, 485);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -279,7 +278,7 @@
             this.algorithmsPanel.Controls.Add(this.panel2);
             this.algorithmsPanel.Controls.Add(this.panel1);
             this.algorithmsPanel.Location = new System.Drawing.Point(0, 135);
-            this.algorithmsPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.algorithmsPanel.Margin = new System.Windows.Forms.Padding(4);
             this.algorithmsPanel.Name = "algorithmsPanel";
             this.algorithmsPanel.Size = new System.Drawing.Size(1894, 888);
             this.algorithmsPanel.TabIndex = 1;
@@ -293,7 +292,7 @@
             this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backButton.Image = global::LabiryntFrontend.Properties.Resources.backButton;
             this.backButton.Location = new System.Drawing.Point(12, 0);
-            this.backButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.backButton.Margin = new System.Windows.Forms.Padding(4);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(64, 62);
             this.backButton.TabIndex = 2;
@@ -307,7 +306,7 @@
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.algorithm2Button);
             this.panel3.Location = new System.Drawing.Point(723, 74);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(468, 741);
             this.panel3.TabIndex = 1;
@@ -316,7 +315,7 @@
             // 
             this.pictureBox4.Image = global::LabiryntFrontend.Properties.Resources.algorithmIMG1;
             this.pictureBox4.Location = new System.Drawing.Point(33, 105);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(405, 268);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -328,12 +327,12 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Consolas", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
-            this.label2.Location = new System.Drawing.Point(57, 14);
+            this.label2.Location = new System.Drawing.Point(131, 14);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(365, 112);
+            this.label2.Size = new System.Drawing.Size(206, 112);
             this.label2.TabIndex = 2;
-            this.label2.Text = "INNY 2";
+            this.label2.Text = "BFS";
             // 
             // algorithm2Button
             // 
@@ -345,7 +344,7 @@
             this.algorithm2Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.algorithm2Button.ForeColor = System.Drawing.Color.Transparent;
             this.algorithm2Button.Location = new System.Drawing.Point(123, 608);
-            this.algorithm2Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.algorithm2Button.Margin = new System.Windows.Forms.Padding(4);
             this.algorithm2Button.Name = "algorithm2Button";
             this.algorithm2Button.Size = new System.Drawing.Size(225, 100);
             this.algorithm2Button.TabIndex = 2;
@@ -360,7 +359,7 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.algorithm3Button);
             this.panel2.Location = new System.Drawing.Point(1335, 74);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(468, 741);
             this.panel2.TabIndex = 1;
@@ -369,7 +368,7 @@
             // 
             this.pictureBox5.Image = global::LabiryntFrontend.Properties.Resources.algorithmIMG1;
             this.pictureBox5.Location = new System.Drawing.Point(38, 105);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(405, 268);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -398,7 +397,7 @@
             this.algorithm3Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.algorithm3Button.ForeColor = System.Drawing.Color.Transparent;
             this.algorithm3Button.Location = new System.Drawing.Point(129, 608);
-            this.algorithm3Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.algorithm3Button.Margin = new System.Windows.Forms.Padding(4);
             this.algorithm3Button.Name = "algorithm3Button";
             this.algorithm3Button.Size = new System.Drawing.Size(225, 100);
             this.algorithm3Button.TabIndex = 3;
@@ -408,33 +407,20 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(111)))), ((int)(((byte)(111)))));
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.pictureBox3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.algorithm1Button);
             this.panel1.Location = new System.Drawing.Point(105, 74);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(460, 741);
             this.panel1.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
-            this.label4.Location = new System.Drawing.Point(34, 405);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(180, 22);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "tu opis algorytmu";
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::LabiryntFrontend.Properties.Resources.algorithmIMG1;
             this.pictureBox3.Location = new System.Drawing.Point(34, 105);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(405, 268);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -463,7 +449,7 @@
             this.algorithm1Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.algorithm1Button.ForeColor = System.Drawing.Color.Transparent;
             this.algorithm1Button.Location = new System.Drawing.Point(110, 608);
-            this.algorithm1Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.algorithm1Button.Margin = new System.Windows.Forms.Padding(4);
             this.algorithm1Button.Name = "algorithm1Button";
             this.algorithm1Button.Size = new System.Drawing.Size(225, 100);
             this.algorithm1Button.TabIndex = 0;
@@ -474,8 +460,8 @@
             // mainPanel
             // 
             this.mainPanel.Controls.Add(this.panelTools);
-            this.mainPanel.Controls.Add(this.algorithmsPanel);
             this.mainPanel.Controls.Add(this.panelEditor);
+            this.mainPanel.Controls.Add(this.algorithmsPanel);
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.mainPanel.Name = "mainPanel";
@@ -491,7 +477,7 @@
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1896, 1022);
             this.Controls.Add(this.mainPanel);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "GbMaze";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GbMaze";
@@ -546,7 +532,6 @@
         private Label label1;
         private PictureBox pictureBox4;
         private PictureBox pictureBox5;
-        private Label label4;
         private CheckBox isRandom;
         private Panel mainPanel;
         private Button backButton;
