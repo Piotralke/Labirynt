@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -155,13 +156,20 @@ namespace LabiryntFrontend
                 }
                 maze_data = newGrid;
                 buttonStart.Enabled = false;
-                // Przerysowanie kontrolki pictureBox1 z nowymi wymiarami
+                //Przerysowanie kontrolki pictureBox1 z nowymi wymiarami
                 Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
                 Graphics g = Graphics.FromImage((Image)tB);
 
                 Brush w = Brushes.LightGray;
                 g.FillRectangle(w, 0, 0, tB.Width - 1, tB.Height - 1);
                 pictureBox1.Image = tB;
+                storedMaze.Image = pictureBox1.Image;
+                exitList.Items.Clear();
+                exitTable.Clear();
+                startXInput.Text = "";
+                startYInput.Text = "";
+                exitXInput.Text = "";
+                exitYInput.Text = "";
             }
         }
 
@@ -353,7 +361,12 @@ namespace LabiryntFrontend
                 pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
                 storedMaze.Image = pictureBox1.Image;
             }
-
+            exitList.Items.Clear();
+            exitTable.Clear();
+            startXInput.Text = "";
+            startYInput.Text = "";
+            exitXInput.Text = "";
+            exitYInput.Text = "";
             //pictureBox1.Invalidate();
         }
 
@@ -787,117 +800,162 @@ namespace LabiryntFrontend
 
         private void algorithm1Button_Click(object sender, EventArgs e)
         {
-            parametrForm form = new parametrForm(cols, rows);
-
-
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                ArrayList exits = form.exitTable;
-                int startX = form.startX;
-                int startY = form.startY;
-
-                ArrayList solvePath = Solve(startX, startY, exits);
-
-                int xSize = pictureBox1.Image.Width / cols;
-                int ySize = pictureBox1.Image.Height / rows;
-
-                int penSize = 5;
-
-                Bitmap tB = new Bitmap(storedMaze.Image);
-                Pen p = new Pen(Color.Black, penSize);
-                Graphics g = Graphics.FromImage((Image)tB);
-                Pen b = new Pen(Color.Blue, penSize);
-                Pen r = new Pen(Color.Red, penSize);
-                // not time-cosuming, so don't bother to optimize
-                if (solvePath != null)
-                {
-                    for (int i = 1; i < solvePath.Count; i++)
-                    {
-                        cCellPosition u = (cCellPosition)solvePath[i - 1];
-                        cCellPosition t = (cCellPosition)solvePath[i];
-                        g.DrawLine(p,
-                                   xSize * u.x + xSize / 2,
-                                   ySize * u.y + ySize / 2,
-                                   xSize * t.x + xSize / 2,
-                                   ySize * t.y + ySize / 2);
-                        pictureBox1.Image = tB;
-                    }
-                    g.DrawEllipse(b, startX * xSize, startY * ySize, xSize, ySize);
-                    foreach (exitCoords cords in exits)
-                    {
-                        g.DrawEllipse(r, cords.x * xSize, cords.y * ySize, xSize, ySize);
-                    }
-
-                }
-
-                p.Dispose();
-                g.Dispose();
-                panelList[0].BringToFront();
-                panelTools.Enabled = true;
-            }
-
+            ArrayList solvePath = Solve(int.Parse(startXInput.Text), int.Parse(startYInput.Text), exitTable);
+            draw(solvePath);
 
         }
-
-        private void algorithm2Button_Click(object sender, EventArgs e)
+        private void draw(ArrayList solvePath)
         {
-            parametrForm form = new parametrForm(cols, rows);
+            Bitmap tB = new Bitmap(storedMaze.Image);
 
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                ArrayList exits = form.exitTable;
-                int startX = form.startX;
-                int startY = form.startY;
-                ArrayList solvePath = SolveBFS(startX, startY, exits);
-                int xSize = pictureBox1.Image.Width / cols;
-                int ySize = pictureBox1.Image.Height / rows;
+            int penSize = 5;
+            Pen p = new Pen(Color.Black, penSize);
+            Graphics g = Graphics.FromImage((Image)tB);
+            int xSize = pictureBox1.Image.Width / cols;
+            int ySize = pictureBox1.Image.Height / rows;
+            // not time-cosuming, so don't bother to optimize
 
-                int penSize = 5;
-
-                Bitmap tB = new Bitmap(storedMaze.Image);
-                Pen p = new Pen(Color.Black, penSize);
-                Pen b = new Pen(Color.Blue, penSize);
-                Pen r = new Pen(Color.Red, penSize);
-                Graphics g = Graphics.FromImage((Image)tB);
-                // not time-cosuming, so don't bother to optimize
-                if (solvePath != null)
-                    for (int i = 1; i < solvePath.Count; i++)
-                    {
-                        cCellPosition u = (cCellPosition)solvePath[i - 1];
-                        cCellPosition t = (cCellPosition)solvePath[i];
-                        g.DrawLine(p,
-                                   xSize * u.x + xSize / 2,
-                                   ySize * u.y + ySize / 2,
-                                   xSize * t.x + xSize / 2,
-                                   ySize * t.y + ySize / 2);
-                        pictureBox1.Image = tB;
-                    }
-                g.DrawEllipse(b, startX * xSize, startY * ySize, xSize, ySize);
-                foreach (exitCoords cords in exits)
+            if (solvePath != null)
+                for (int i = 1; i < solvePath.Count; i++)
                 {
-                    g.DrawEllipse(r, cords.x * xSize, cords.y * ySize, xSize, ySize);
+                    cCellPosition u = (cCellPosition)solvePath[i - 1];
+                    cCellPosition t = (cCellPosition)solvePath[i];
+                    g.DrawLine(p,
+                               xSize * u.x + xSize / 2,
+                               ySize * u.y + ySize / 2,
+                               xSize * t.x + xSize / 2,
+                               ySize * t.y + ySize / 2);
+                    pictureBox1.Image = tB;
                 }
-                p.Dispose();
-                g.Dispose();
-                panelList[0].BringToFront();
-                panelTools.Enabled = true;
+            renderGates(pictureBox1.Image);
+            p.Dispose();
+            g.Dispose();
+            panelList[0].BringToFront();
+            panelTools.Enabled = true;
+        }
+        private void algorithm2Button_Click(object sender, EventArgs e)
+        {  
+            ArrayList solvePath = SolveBFS(int.Parse(startXInput.Text), int.Parse(startYInput.Text), exitTable);
+            draw(solvePath);
+        }
+        private void renderGates(Image img)
+        {
+            int xSize = pictureBox1.Image.Width / cols;
+            int ySize = pictureBox1.Image.Height / rows;
+            int penSize = 5;
+            Bitmap tB = new Bitmap(img);
+            Pen r = new Pen(Color.Red, penSize);
+            Graphics g = Graphics.FromImage((Image)tB);
+
+            foreach (exitCoords cords in exitTable)
+            {
+                g.DrawEllipse(r, cords.x * xSize, cords.y * ySize, xSize, ySize);
             }
 
+            int x = 0, y = 0;
 
-
+            if (int.TryParse(startXInput.Text, out x) && int.TryParse(startYInput.Text, out y))
+            {
+                if (x >= 0 && x < cols && y >= 0 && y < rows)
+                {
+                    Pen b = new Pen(Color.Blue, penSize);
+                    if (startXInput.Text != "" && startYInput.Text != "")
+                        g.DrawEllipse(b, x * xSize, y * ySize, xSize, ySize);
+                }
+            }
+            pictureBox1.Image = tB;
+            g.Dispose();
         }
-
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             exitCoords newExit = new exitCoords();
-            newExit.x = int.Parse(exitXInput.Text);
-            newExit.y = int.Parse(exitYInput.Text);
-            exitTable.Add(newExit);
-            exitList.Items.Add(newExit.x + ", " + newExit.y);
+            if (int.TryParse(exitXInput.Text, out newExit.x) && int.TryParse(exitYInput.Text, out newExit.y))
+            {
+                if (newExit.x >= 0 && newExit.x < cols && newExit.y >= 0 && newExit.y < rows)
+                {
+                    exitTable.Add(newExit);
+                    exitList.Items.Add(newExit.x + ", " + newExit.y);
+                    renderGates(storedMaze.Image);
+                }
+
+            }
 
         }
+
+        private void exitList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewItem selectedItem = exitList.SelectedItems[0];
+            exitTable.RemoveAt(selectedItem.Index);
+            exitList.Items.Remove(selectedItem);
+            renderGates(storedMaze.Image);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+            renderGates(storedMaze.Image);
+
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Filter = "Pliki PNG (*.png)|*.png";
+                saveDialog.Title = "Zapisz obraz";
+                saveDialog.CheckFileExists = false;
+                saveDialog.CheckPathExists = true;
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fileProperties = saveDialog.FileName;
+                    string fileName = Path.GetFileName(fileProperties);
+                    string fileDirectory = Path.GetDirectoryName(fileProperties);
+
+
+                    SavePictureBoxAsPng(pictureBox1, fileProperties);
+                    MessageBox.Show("Obraz " + fileName + " został zapisany pomyślnie w lokacji: " + fileDirectory, " Zapisano", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+            }
+        }
+        private void SavePictureBoxAsPng(PictureBox pictureBox, string fileName)
+        {
+            if (pictureBox.Image != null)
+            {
+                if (pictureBox.Image != null)
+                {
+                    using (Bitmap bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height))
+                    {
+                        pictureBox.DrawToBitmap(bitmap, pictureBox1.ClientRectangle);
+                        bitmap.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+                }
+            }
+        }
+
+        private void exitXInput_TextChanged(object sender, EventArgs e)
+        {
+            exitCoords newExit = new exitCoords();
+            if (int.TryParse(exitXInput.Text, out newExit.x) && int.TryParse(exitYInput.Text, out newExit.y))
+            {
+                if (newExit.x >= 0 && newExit.x < cols && newExit.y >= 0 && newExit.y < rows)
+                {
+                    button1.Enabled = true;
+                }
+                else
+                {
+                    button1.Enabled = false;
+                }
+
+            }
+            else
+            {
+                button1.Enabled = false;
+            }
+        }
     }
+
     public class cMazeState
     {
         public int x, y, dir;

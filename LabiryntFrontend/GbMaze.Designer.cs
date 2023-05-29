@@ -30,7 +30,7 @@
         {
             panelTools = new Panel();
             exitXInput = new TextBox();
-            textBox2 = new TextBox();
+            startXInput = new TextBox();
             exitYInput = new TextBox();
             startYInput = new TextBox();
             button1 = new Button();
@@ -80,7 +80,7 @@
             // 
             panelTools.BackColor = Color.WhiteSmoke;
             panelTools.Controls.Add(exitXInput);
-            panelTools.Controls.Add(textBox2);
+            panelTools.Controls.Add(startXInput);
             panelTools.Controls.Add(exitYInput);
             panelTools.Controls.Add(startYInput);
             panelTools.Controls.Add(button1);
@@ -109,15 +109,17 @@
             exitXInput.PlaceholderText = "Pozycja wyjścia x";
             exitXInput.Size = new Size(107, 23);
             exitXInput.TabIndex = 13;
+            exitXInput.TextChanged += exitXInput_TextChanged;
             // 
-            // textBox2
+            // startXInput
             // 
-            textBox2.Location = new Point(519, 17);
-            textBox2.Margin = new Padding(2);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Pozycja startowa x";
-            textBox2.Size = new Size(107, 23);
-            textBox2.TabIndex = 14;
+            startXInput.Location = new Point(519, 17);
+            startXInput.Margin = new Padding(2);
+            startXInput.Name = "startXInput";
+            startXInput.PlaceholderText = "Pozycja startowa x";
+            startXInput.Size = new Size(107, 23);
+            startXInput.TabIndex = 14;
+            startXInput.TextChanged += textBox2_TextChanged;
             // 
             // exitYInput
             // 
@@ -127,6 +129,7 @@
             exitYInput.PlaceholderText = "Pozycja wyjścia y";
             exitYInput.Size = new Size(107, 23);
             exitYInput.TabIndex = 15;
+            exitYInput.TextChanged += exitXInput_TextChanged;
             // 
             // startYInput
             // 
@@ -136,6 +139,7 @@
             startYInput.PlaceholderText = "Pozycja startowa y";
             startYInput.Size = new Size(107, 23);
             startYInput.TabIndex = 16;
+            startYInput.TextChanged += textBox2_TextChanged;
             // 
             // button1
             // 
@@ -242,6 +246,7 @@
             button7.Size = new Size(60, 60);
             button7.TabIndex = 0;
             button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // button6
             // 
@@ -537,7 +542,6 @@
         private ListView exitList;
         private TextBox exitXInput;
         private TextBox startXInput;
-        private TextBox textBox2;
         private TextBox exitYInput;
         private TextBox startYInput;
     }
