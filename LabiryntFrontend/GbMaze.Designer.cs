@@ -157,7 +157,6 @@
             label4.Size = new Size(105, 15);
             label4.TabIndex = 11;
             label4.Text = "Wyjścia z labiryntu";
-
             // 
             // exitList
             // 
@@ -168,6 +167,7 @@
             exitList.TabIndex = 10;
             exitList.UseCompatibleStateImageBehavior = false;
             exitList.View = View.Details;
+            exitList.MouseDoubleClick += exitList_MouseDoubleClick;
             // 
             // isRandom
             // 
