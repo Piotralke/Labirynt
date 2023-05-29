@@ -25,7 +25,7 @@ namespace LabiryntFrontend
             N = 1,
             W = 2
         }
-        
+
         private const int cellSize = 20; // rozmiar pojedynczej komórki
         private int rows = 10; // ilość wierszy
         private int cols = 10; // ilość kolumn
@@ -35,7 +35,7 @@ namespace LabiryntFrontend
 
         Stack s_stack;
         Random r;
-
+        public ArrayList exitTable = new ArrayList();
 
         public int[] maze_base;
         public byte[,] maze_data = new byte[10, 10];
@@ -43,6 +43,7 @@ namespace LabiryntFrontend
         public GbMaze()
         {
             InitializeComponent();
+            exitList.Columns.Add("Współrzędne wyjść", 130);
             button3.Enabled = false;
             button6.Enabled = false;
             isRandom.Checked = false;
@@ -67,7 +68,7 @@ namespace LabiryntFrontend
 
             panelList[1].BringToFront();
             panelTools.Enabled = false;
-  
+
 
         }
 
@@ -99,13 +100,13 @@ namespace LabiryntFrontend
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -352,7 +353,7 @@ namespace LabiryntFrontend
                 pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
                 storedMaze.Image = pictureBox1.Image;
             }
-            
+
             //pictureBox1.Invalidate();
         }
 
@@ -395,9 +396,9 @@ namespace LabiryntFrontend
                         g.DrawLine(bp,
                             new Point(xSize * i, ySize * j),
                             new Point(xSize * i, ySize * (j + 1)));
-                    
+
                 }
-          
+
 
             g.Dispose();
 
@@ -422,12 +423,12 @@ namespace LabiryntFrontend
 
             // zabezpieczenia
             if (maze_data == null) return null;
-            foreach(exitCoords cords in exitCoords)
+            foreach (exitCoords cords in exitCoords)
             {
                 if (xSource == cords.x && ySource == cords.y) return calcState;
             }
-            
-            
+
+
             while (destReached == false && calcState.Count > 0)
             {
                 step++;
@@ -445,14 +446,14 @@ namespace LabiryntFrontend
                                 tMazePath[calcCPos.x, calcCPos.y - 1] = step;
                                 cCellPosition calcNextCPos = new cCellPosition(calcCPos.x, calcCPos.y - 1);
                                 calcNextState.Add(calcNextCPos);
-                                foreach(exitCoords coords in exitCoords)
+                                foreach (exitCoords coords in exitCoords)
                                 {
 
                                     if (calcNextCPos.x == coords.x && calcNextCPos.y == coords.y)
                                     {
                                         exitReached.x = coords.x;
                                         exitReached.y = coords.y;
-                                        destReached = true; 
+                                        destReached = true;
                                     }
                                 }
                             }
@@ -603,7 +604,7 @@ namespace LabiryntFrontend
 
             // Zabezpieczenia
             if (maze_data == null) return null;
-            foreach(exitCoords cords in exitCoords)
+            foreach (exitCoords cords in exitCoords)
             {
 
                 if (xSource == cords.x && ySource == cords.y) return new ArrayList() { cellPos };
@@ -633,7 +634,7 @@ namespace LabiryntFrontend
                                     break;
                                 }
                             }
-                                
+
                         }
                 // W
                 if (currentPos.x > 0)
@@ -754,8 +755,8 @@ namespace LabiryntFrontend
 
         private void seedInput_TextChanged(object sender, EventArgs e)
         {
-            
-            if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646 )
+
+            if (int.TryParse(seedInput.Text, out seedValue) && seedValue <= 2147483646)
             {
                 button6.Enabled = true;
             }
@@ -786,20 +787,20 @@ namespace LabiryntFrontend
 
         private void algorithm1Button_Click(object sender, EventArgs e)
         {
-            parametrForm form = new parametrForm(cols,rows);
-            
-            
-            if(form.ShowDialog() == DialogResult.OK)
+            parametrForm form = new parametrForm(cols, rows);
+
+
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 ArrayList exits = form.exitTable;
                 int startX = form.startX;
                 int startY = form.startY;
 
-                ArrayList solvePath = Solve(startX,startY, exits);
+                ArrayList solvePath = Solve(startX, startY, exits);
 
                 int xSize = pictureBox1.Image.Width / cols;
                 int ySize = pictureBox1.Image.Height / rows;
-                
+
                 int penSize = 5;
 
                 Bitmap tB = new Bitmap(storedMaze.Image);
@@ -821,27 +822,27 @@ namespace LabiryntFrontend
                                    ySize * t.y + ySize / 2);
                         pictureBox1.Image = tB;
                     }
-                    g.DrawEllipse(b, startX * xSize , startY * ySize , xSize , ySize );
+                    g.DrawEllipse(b, startX * xSize, startY * ySize, xSize, ySize);
                     foreach (exitCoords cords in exits)
                     {
                         g.DrawEllipse(r, cords.x * xSize, cords.y * ySize, xSize, ySize);
                     }
-                    
+
                 }
-                    
+
                 p.Dispose();
                 g.Dispose();
                 panelList[0].BringToFront();
                 panelTools.Enabled = true;
             }
-            
+
 
         }
 
         private void algorithm2Button_Click(object sender, EventArgs e)
         {
             parametrForm form = new parametrForm(cols, rows);
-            
+
             if (form.ShowDialog() == DialogResult.OK)
             {
                 ArrayList exits = form.exitTable;
@@ -882,7 +883,18 @@ namespace LabiryntFrontend
                 panelTools.Enabled = true;
             }
 
-            
+
+
+        }
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            exitCoords newExit = new exitCoords();
+            newExit.x = int.Parse(exitXInput.Text);
+            newExit.y = int.Parse(exitYInput.Text);
+            exitTable.Add(newExit);
+            exitList.Items.Add(newExit.x + ", " + newExit.y);
 
         }
     }

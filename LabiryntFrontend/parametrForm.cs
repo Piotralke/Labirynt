@@ -17,7 +17,7 @@ namespace LabiryntFrontend
         private int rows;
         public int startX;
         public int startY;
-        public ArrayList exitTable = new ArrayList() ;
+        public ArrayList exitTable = new ArrayList();
         public parametrForm()
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace LabiryntFrontend
             InitializeComponent();
             this.cols = cols;
             this.rows = rows;
-            exitList.Columns.Add("Współrzędne wyjść",200);
+            exitList.Columns.Add("Współrzędne wyjść", 200);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace LabiryntFrontend
 
         private void button2_Click(object sender, EventArgs e)
         {
-            startX= int.Parse(startXInput.Text);
+            startX = int.Parse(startXInput.Text);
             startY = int.Parse(startYInput.Text);
             this.DialogResult = DialogResult.OK;
             Close();

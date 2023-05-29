@@ -28,107 +28,115 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.startYInput = new System.Windows.Forms.TextBox();
-            this.startXInput = new System.Windows.Forms.TextBox();
-            this.exitList = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.exitXInput = new System.Windows.Forms.TextBox();
-            this.exitYInput = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            startYInput = new TextBox();
+            startXInput = new TextBox();
+            exitList = new ListView();
+            label1 = new Label();
+            exitXInput = new TextBox();
+            exitYInput = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            SuspendLayout();
             // 
             // startYInput
             // 
-            this.startYInput.Location = new System.Drawing.Point(87, 131);
-            this.startYInput.Name = "startYInput";
-            this.startYInput.PlaceholderText = "Pozycja startowa y";
-            this.startYInput.Size = new System.Drawing.Size(227, 31);
-            this.startYInput.TabIndex = 0;
+            startYInput.Location = new Point(61, 79);
+            startYInput.Margin = new Padding(2, 2, 2, 2);
+            startYInput.Name = "startYInput";
+            startYInput.PlaceholderText = "Pozycja startowa y";
+            startYInput.Size = new Size(160, 23);
+            startYInput.TabIndex = 0;
             // 
             // startXInput
             // 
-            this.startXInput.Location = new System.Drawing.Point(87, 84);
-            this.startXInput.Name = "startXInput";
-            this.startXInput.PlaceholderText = "Pozycja startowa x";
-            this.startXInput.Size = new System.Drawing.Size(227, 31);
-            this.startXInput.TabIndex = 0;
+            startXInput.Location = new Point(61, 50);
+            startXInput.Margin = new Padding(2, 2, 2, 2);
+            startXInput.Name = "startXInput";
+            startXInput.PlaceholderText = "Pozycja startowa x";
+            startXInput.Size = new Size(160, 23);
+            startXInput.TabIndex = 0;
             // 
             // exitList
             // 
-            this.exitList.Location = new System.Drawing.Point(87, 212);
-            this.exitList.Name = "exitList";
-            this.exitList.Size = new System.Drawing.Size(227, 259);
-            this.exitList.TabIndex = 1;
-            this.exitList.UseCompatibleStateImageBehavior = false;
-            this.exitList.View = System.Windows.Forms.View.Details;
+            exitList.Location = new Point(61, 127);
+            exitList.Margin = new Padding(2, 2, 2, 2);
+            exitList.Name = "exitList";
+            exitList.Size = new Size(160, 157);
+            exitList.TabIndex = 1;
+            exitList.UseCompatibleStateImageBehavior = false;
+            exitList.View = View.Details;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(87, 185);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 25);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Wyjścia z labiryntu";
+            label1.AutoSize = true;
+            label1.Location = new Point(61, 111);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(105, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Wyjścia z labiryntu";
             // 
             // exitXInput
             // 
-            this.exitXInput.Location = new System.Drawing.Point(424, 84);
-            this.exitXInput.Name = "exitXInput";
-            this.exitXInput.PlaceholderText = "Pozycja wyjścia x";
-            this.exitXInput.Size = new System.Drawing.Size(227, 31);
-            this.exitXInput.TabIndex = 0;
+            exitXInput.Location = new Point(297, 50);
+            exitXInput.Margin = new Padding(2, 2, 2, 2);
+            exitXInput.Name = "exitXInput";
+            exitXInput.PlaceholderText = "Pozycja wyjścia x";
+            exitXInput.Size = new Size(160, 23);
+            exitXInput.TabIndex = 0;
             // 
             // exitYInput
             // 
-            this.exitYInput.Location = new System.Drawing.Point(424, 131);
-            this.exitYInput.Name = "exitYInput";
-            this.exitYInput.PlaceholderText = "Pozycja wyjścia y";
-            this.exitYInput.Size = new System.Drawing.Size(227, 31);
-            this.exitYInput.TabIndex = 0;
+            exitYInput.Location = new Point(297, 79);
+            exitYInput.Margin = new Padding(2, 2, 2, 2);
+            exitYInput.Name = "exitYInput";
+            exitYInput.PlaceholderText = "Pozycja wyjścia y";
+            exitYInput.Size = new Size(160, 23);
+            exitYInput.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(445, 185);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 34);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Dodaj wyjście";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(312, 111);
+            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(122, 20);
+            button1.TabIndex = 3;
+            button1.Text = "Dodaj wyjście";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(599, 437);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 34);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Zatwierdź";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Enabled = false;
+            button2.Location = new Point(419, 262);
+            button2.Margin = new Padding(2, 2, 2, 2);
+            button2.Name = "button2";
+            button2.Size = new Size(78, 20);
+            button2.TabIndex = 4;
+            button2.Text = "Zatwierdź";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // parametrForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(753, 505);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.exitList);
-            this.Controls.Add(this.exitXInput);
-            this.Controls.Add(this.startXInput);
-            this.Controls.Add(this.exitYInput);
-            this.Controls.Add(this.startYInput);
-            this.MaximizeBox = false;
-            this.Name = "parametrForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "parametrForm";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(527, 303);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(label1);
+            Controls.Add(exitList);
+            Controls.Add(exitXInput);
+            Controls.Add(startXInput);
+            Controls.Add(exitYInput);
+            Controls.Add(startYInput);
+            Margin = new Padding(2, 2, 2, 2);
+            MaximizeBox = false;
+            Name = "parametrForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "parametrForm";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
