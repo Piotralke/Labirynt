@@ -15,7 +15,8 @@ using System.Timers;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.AxHost;
-
+using System.Text.Json;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LabiryntFrontend
 {
@@ -30,13 +31,18 @@ namespace LabiryntFrontend
         private const int cellSize = 20; // rozmiar pojedynczej komórki
         private int rows = 10; // ilość wierszy
         private int cols = 10; // ilość kolumn
+
         List<Panel> panelList = new List<Panel>();
         int seedValue = 0;
         public PictureBox storedMaze = new PictureBox();
+        private List<string> variablesList = new List<string>();
+
+        
 
         Stack s_stack;
         Random r;
         public ArrayList exitTable = new ArrayList();
+        exitCoords entryCoords = new exitCoords();
 
         public int[] maze_base;
         public byte[,] maze_data = new byte[10, 10];
@@ -49,6 +55,14 @@ namespace LabiryntFrontend
             button6.Enabled = false;
             isRandom.Checked = false;
             buttonStart.Enabled = false;
+            startXInput.Enabled = false;
+            startYInput.Enabled = false;
+            exitXInput.Enabled = false;
+            exitYInput.Enabled = false;
+            button1.Enabled = false;
+            addEntryButton.Enabled = false;
+            saveMazeAsPNG.Enabled = false;
+
             panelList.Add(panelEditor);
             panelList.Add(algorithmsPanel);
             this.Controls.Add(storedMaze);
@@ -167,9 +181,18 @@ namespace LabiryntFrontend
                 exitList.Items.Clear();
                 exitTable.Clear();
                 startXInput.Text = "";
+                startXInput.Enabled = false;
                 startYInput.Text = "";
+                startYInput.Enabled = false;
+
                 exitXInput.Text = "";
+                exitXInput.Enabled = false;
+
                 exitYInput.Text = "";
+                exitYInput.Enabled = false;
+
+                button1.Enabled = false;
+                saveMazeAsPNG.Enabled = false;
             }
         }
 
@@ -345,15 +368,17 @@ namespace LabiryntFrontend
 
         private void button6_Click(object sender, EventArgs e)
         {
-            buttonStart.Enabled = true;
-
+            variablesList.Clear();
+            
             if (isRandom.Checked == true)
             {
                 Random r = new Random();
                 int randomSeed = r.Next(0, 2147483646);
+                variablesList.Insert(0, randomSeed.ToString());
                 GenerateMaze(cols, rows, randomSeed);
                 pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
                 storedMaze.Image = pictureBox1.Image;
+                saveMazeAsPNG.Enabled = true;
             }
             else
             {
@@ -367,6 +392,11 @@ namespace LabiryntFrontend
             startYInput.Text = "";
             exitXInput.Text = "";
             exitYInput.Text = "";
+
+            startXInput.Enabled = true;
+            startYInput.Enabled = true;
+            exitXInput.Enabled = true;
+            exitYInput.Enabled = true;
             //pictureBox1.Invalidate();
         }
 
@@ -869,14 +899,55 @@ namespace LabiryntFrontend
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            
             exitCoords newExit = new exitCoords();
             if (int.TryParse(exitXInput.Text, out newExit.x) && int.TryParse(exitYInput.Text, out newExit.y))
             {
                 if (newExit.x >= 0 && newExit.x < cols && newExit.y >= 0 && newExit.y < rows)
                 {
-                    exitTable.Add(newExit);
-                    exitList.Items.Add(newExit.x + ", " + newExit.y);
-                    renderGates(storedMaze.Image);
+                    if(!newExit.Equals(entryCoords))
+                    {
+                        if (!exitTable.Contains(newExit))
+                        {
+                            
+                            exitTable.Add(newExit);
+                           
+                            exitList.Items.Add(newExit.x + ", " + newExit.y);
+
+                         
+                            renderGates(storedMaze.Image);
+
+                            int newInputX;
+                            int newInputY;
+                            if (int.TryParse(startXInput.Text, out newInputX) && int.TryParse(startYInput.Text, out newInputY))
+                            {
+                                if (newInputX >= 0 && newInputX < cols && newInputY >= 0 && newInputY < rows)
+                                {
+                                    buttonStart.Enabled = true;
+                                }
+                                else
+                                {
+                                    buttonStart.Enabled = false;
+                                }
+
+                            }
+                            else
+                            {
+                                buttonStart.Enabled = false;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Nie można dodać 2 razy tych samych współrzędnych!", " Błąd dodawania wyjścia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Współrzędne wyjścia nie mogą być takie same jak współrzędne wejścia", " Błąd dodawania wyjścia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                   
+                   
                 }
 
             }
@@ -889,6 +960,15 @@ namespace LabiryntFrontend
             exitTable.RemoveAt(selectedItem.Index);
             exitList.Items.Remove(selectedItem);
             renderGates(storedMaze.Image);
+
+            if(exitList.Items.Count > 0)
+            {
+                buttonStart.Enabled = true;
+            }
+            else
+            {
+                buttonStart.Enabled = false;
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -953,6 +1033,94 @@ namespace LabiryntFrontend
             {
                 button1.Enabled = false;
             }
+        }
+
+        private void addEntryButton_Click(object sender, EventArgs e)
+        {
+            
+            exitCoords newEntries = new exitCoords();
+            newEntries.x = int.Parse(startXInput.Text);
+            newEntries.y = int.Parse(startYInput.Text);
+
+            if (!exitTable.Contains(newEntries))
+            {
+                renderGates(storedMaze.Image);
+                entryCoords = newEntries;
+
+                variablesList.Insert(1, entryCoords.x.ToString() + "," + entryCoords.y.ToString());
+               
+                if (exitList.Items.Count > 0)
+                {
+                    buttonStart.Enabled = true;
+
+                }
+                else
+                {
+                    buttonStart.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Współrzędne wejścia nie mogą być takie same jak współrzędne wyjścia!", " Błąd dodawania wejścia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+                
+        }
+
+        private void startXInput_TextChanged(object sender, EventArgs e)
+        {
+            int newInputX;
+            int newInputY;
+            if (int.TryParse(startXInput.Text, out newInputX) && int.TryParse(startYInput.Text, out newInputY))
+            {
+                if (newInputX >= 0 && newInputX < cols && newInputY >= 0 && newInputY < rows)
+                {
+                    addEntryButton.Enabled = true;
+                }
+                else
+                {
+                    addEntryButton.Enabled = false;
+                }
+
+            }
+            else
+            {
+                addEntryButton.Enabled = false;
+            }
+        }
+
+        private void saveMazeAsFileButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Plik .maze|*.maze";
+            saveFileDialog.Title = "Zapisz plik .json";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                try
+                {
+                    Dictionary<string, string> variables = new Dictionary<string, string>();
+                    variables.Add("var1", startXInput.Text);
+                    variables.Add("var2", startYInput.Text);
+                    // Dodaj więcej zmiennych do słownika
+
+                    string json = JsonSerializer.Serialize(variables);
+
+                    File.WriteAllText(filePath, json);
+
+                    MessageBox.Show("Plik został zapisany.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Wystąpił błąd podczas zapisywania pliku: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void openMazeAsFileButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

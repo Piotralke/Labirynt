@@ -153,6 +153,16 @@ namespace LabiryntFrontend.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap openFileButton {
+            get {
+                object obj = ResourceManager.GetObject("openFileButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap passwordicon {
             get {
                 object obj = ResourceManager.GetObject("passwordicon", resourceCulture);
@@ -186,6 +196,26 @@ namespace LabiryntFrontend.Properties {
         internal static System.Drawing.Bitmap removeWall {
             get {
                 object obj = ResourceManager.GetObject("removeWall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap saveFileButton {
+            get {
+                object obj = ResourceManager.GetObject("saveFileButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap saveIMGButton {
+            get {
+                object obj = ResourceManager.GetObject("saveIMGButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
