@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panelTools = new System.Windows.Forms.Panel();
+            this.openMazeAsFileButton = new System.Windows.Forms.Button();
+            this.saveMazeAsFileButton = new System.Windows.Forms.Button();
             this.addEntryButton = new System.Windows.Forms.Button();
             this.exitXInput = new System.Windows.Forms.TextBox();
             this.startXInput = new System.Windows.Forms.TextBox();
@@ -63,8 +65,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.algorithm1Button = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.saveMazeAsFileButton = new System.Windows.Forms.Button();
-            this.openMazeAsFileButton = new System.Windows.Forms.Button();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelEditor.SuspendLayout();
@@ -107,13 +107,33 @@
             this.panelTools.Size = new System.Drawing.Size(1266, 87);
             this.panelTools.TabIndex = 0;
             // 
+            // openMazeAsFileButton
+            // 
+            this.openMazeAsFileButton.Image = global::LabiryntFrontend.Properties.Resources.openFileButton;
+            this.openMazeAsFileButton.Location = new System.Drawing.Point(959, 17);
+            this.openMazeAsFileButton.Name = "openMazeAsFileButton";
+            this.openMazeAsFileButton.Size = new System.Drawing.Size(40, 40);
+            this.openMazeAsFileButton.TabIndex = 19;
+            this.openMazeAsFileButton.UseVisualStyleBackColor = true;
+            this.openMazeAsFileButton.Click += new System.EventHandler(this.openMazeAsFileButton_Click);
+            // 
+            // saveMazeAsFileButton
+            // 
+            this.saveMazeAsFileButton.Image = global::LabiryntFrontend.Properties.Resources.saveFileButton;
+            this.saveMazeAsFileButton.Location = new System.Drawing.Point(915, 17);
+            this.saveMazeAsFileButton.Name = "saveMazeAsFileButton";
+            this.saveMazeAsFileButton.Size = new System.Drawing.Size(40, 40);
+            this.saveMazeAsFileButton.TabIndex = 18;
+            this.saveMazeAsFileButton.UseVisualStyleBackColor = true;
+            this.saveMazeAsFileButton.Click += new System.EventHandler(this.saveMazeAsFileButton_Click);
+            // 
             // addEntryButton
             // 
             this.addEntryButton.Location = new System.Drawing.Point(630, 15);
             this.addEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.addEntryButton.Name = "addEntryButton";
             this.addEntryButton.Size = new System.Drawing.Size(60, 60);
-            this.addEntryButton.TabIndex = 17;
+            this.addEntryButton.TabIndex = 19;
             this.addEntryButton.Text = "Dodaj wejście";
             this.addEntryButton.UseVisualStyleBackColor = true;
             this.addEntryButton.Click += new System.EventHandler(this.addEntryButton_Click);
@@ -125,7 +145,7 @@
             this.exitXInput.Name = "exitXInput";
             this.exitXInput.PlaceholderText = "Pozycja wyjścia x";
             this.exitXInput.Size = new System.Drawing.Size(107, 23);
-            this.exitXInput.TabIndex = 13;
+            this.exitXInput.TabIndex = 16;
             this.exitXInput.TextChanged += new System.EventHandler(this.exitXInput_TextChanged);
             // 
             // startXInput
@@ -145,7 +165,7 @@
             this.exitYInput.Name = "exitYInput";
             this.exitYInput.PlaceholderText = "Pozycja wyjścia y";
             this.exitYInput.Size = new System.Drawing.Size(107, 23);
-            this.exitYInput.TabIndex = 15;
+            this.exitYInput.TabIndex = 17;
             this.exitYInput.TextChanged += new System.EventHandler(this.exitXInput_TextChanged);
             // 
             // startYInput
@@ -155,7 +175,7 @@
             this.startYInput.Name = "startYInput";
             this.startYInput.PlaceholderText = "Pozycja startowa y";
             this.startYInput.Size = new System.Drawing.Size(107, 23);
-            this.startYInput.TabIndex = 16;
+            this.startYInput.TabIndex = 15;
             this.startYInput.TextChanged += new System.EventHandler(this.startXInput_TextChanged);
             // 
             // button1
@@ -164,7 +184,7 @@
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(60, 60);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 20;
             this.button1.Text = "Dodaj wyjście";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
@@ -494,26 +514,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1263, 682);
             this.mainPanel.TabIndex = 1;
-            // 
-            // saveMazeAsFileButton
-            // 
-            this.saveMazeAsFileButton.Image = global::LabiryntFrontend.Properties.Resources.saveFileButton;
-            this.saveMazeAsFileButton.Location = new System.Drawing.Point(915, 17);
-            this.saveMazeAsFileButton.Name = "saveMazeAsFileButton";
-            this.saveMazeAsFileButton.Size = new System.Drawing.Size(40, 40);
-            this.saveMazeAsFileButton.TabIndex = 18;
-            this.saveMazeAsFileButton.UseVisualStyleBackColor = true;
-            this.saveMazeAsFileButton.Click += new System.EventHandler(this.saveMazeAsFileButton_Click);
-            // 
-            // openMazeAsFileButton
-            // 
-            this.openMazeAsFileButton.Image = global::LabiryntFrontend.Properties.Resources.openFileButton;
-            this.openMazeAsFileButton.Location = new System.Drawing.Point(959, 17);
-            this.openMazeAsFileButton.Name = "openMazeAsFileButton";
-            this.openMazeAsFileButton.Size = new System.Drawing.Size(40, 40);
-            this.openMazeAsFileButton.TabIndex = 19;
-            this.openMazeAsFileButton.UseVisualStyleBackColor = true;
-            this.openMazeAsFileButton.Click += new System.EventHandler(this.openMazeAsFileButton_Click);
             // 
             // GbMaze
             // 

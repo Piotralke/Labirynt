@@ -37,19 +37,26 @@ namespace LabiryntFrontend
         public PictureBox storedMaze = new PictureBox();
         private List<string> variablesList = new List<string>();
 
-        
+
 
         Stack s_stack;
         Random r;
         public ArrayList exitTable = new ArrayList();
-        exitCoords entryCoords = new exitCoords();
 
+        //Json
+        public int generatedSeed;
+        exitCoords entryCoords = new exitCoords();
+        List<exitCoords> exitCoordsJson = new List<exitCoords>();
+
+
+        //
         public int[] maze_base;
         public byte[,] maze_data = new byte[10, 10];
 
         public GbMaze()
         {
             InitializeComponent();
+
             exitList.Columns.Add("Współrzędne wyjść", 130);
             button3.Enabled = false;
             button6.Enabled = false;
@@ -62,6 +69,7 @@ namespace LabiryntFrontend
             button1.Enabled = false;
             addEntryButton.Enabled = false;
             saveMazeAsPNG.Enabled = false;
+            saveMazeAsFileButton.Enabled = false;
 
             panelList.Add(panelEditor);
             panelList.Add(algorithmsPanel);
@@ -150,8 +158,8 @@ namespace LabiryntFrontend
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Warning! Changing the maze size will result in removing all walls. Are you sure you want to change the size?",
-                "Warning",
+            var result = MessageBox.Show("UWAGA! Zmiana rozmiaru labiryntu spowoduje usunięcie wszystkich ścian, wejść oraz wyjść labiryntu!. Czy na pewno chcesz zmienić rozmiar?",
+                "Ostrzeżenie!",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -193,6 +201,7 @@ namespace LabiryntFrontend
 
                 button1.Enabled = false;
                 saveMazeAsPNG.Enabled = false;
+
             }
         }
 
@@ -369,13 +378,12 @@ namespace LabiryntFrontend
         private void button6_Click(object sender, EventArgs e)
         {
             variablesList.Clear();
-            
+
             if (isRandom.Checked == true)
             {
                 Random r = new Random();
-                int randomSeed = r.Next(0, 2147483646);
-                variablesList.Insert(0, randomSeed.ToString());
-                GenerateMaze(cols, rows, randomSeed);
+                generatedSeed = r.Next(0, 2147483646);
+                GenerateMaze(cols, rows, generatedSeed);
                 pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
                 storedMaze.Image = pictureBox1.Image;
                 saveMazeAsPNG.Enabled = true;
@@ -387,6 +395,9 @@ namespace LabiryntFrontend
                 storedMaze.Image = pictureBox1.Image;
             }
             exitList.Items.Clear();
+            exitCoordsJson.Clear();
+            entryCoords.x = -1;
+            entryCoords.y = -1;
             exitTable.Clear();
             startXInput.Text = "";
             startYInput.Text = "";
@@ -397,6 +408,8 @@ namespace LabiryntFrontend
             startYInput.Enabled = true;
             exitXInput.Enabled = true;
             exitYInput.Enabled = true;
+            saveMazeAsFileButton.Enabled = true;
+            buttonStart.Enabled = false;
             //pictureBox1.Invalidate();
         }
 
@@ -830,7 +843,7 @@ namespace LabiryntFrontend
 
         private void algorithm1Button_Click(object sender, EventArgs e)
         {
-            ArrayList solvePath = Solve(int.Parse(startXInput.Text), int.Parse(startYInput.Text), exitTable);
+            ArrayList solvePath = Solve(entryCoords.x, entryCoords.y, exitTable);
             draw(solvePath);
 
         }
@@ -864,8 +877,8 @@ namespace LabiryntFrontend
             panelTools.Enabled = true;
         }
         private void algorithm2Button_Click(object sender, EventArgs e)
-        {  
-            ArrayList solvePath = SolveBFS(int.Parse(startXInput.Text), int.Parse(startYInput.Text), exitTable);
+        {
+            ArrayList solvePath = SolveBFS(entryCoords.x, entryCoords.y, exitTable);
             draw(solvePath);
         }
         private void renderGates(Image img)
@@ -882,46 +895,45 @@ namespace LabiryntFrontend
                 g.DrawEllipse(r, cords.x * xSize, cords.y * ySize, xSize, ySize);
             }
 
-            int x = 0, y = 0;
+            
 
-            if (int.TryParse(startXInput.Text, out x) && int.TryParse(startYInput.Text, out y))
+
+
+            if (entryCoords.x >= 0 && entryCoords.x < cols && entryCoords.y >= 0 && entryCoords.y < rows)
             {
-                if (x >= 0 && x < cols && y >= 0 && y < rows)
-                {
-                    Pen b = new Pen(Color.Blue, penSize);
-                    if (startXInput.Text != "" && startYInput.Text != "")
-                        g.DrawEllipse(b, x * xSize, y * ySize, xSize, ySize);
-                }
-            }
+                Pen b = new Pen(Color.Blue, penSize);
+                //if (startXInput.Text != "" && startYInput.Text != "")
+                    g.DrawEllipse(b, entryCoords.x * xSize, entryCoords.y * ySize, xSize, ySize);
+            } 
+                
             pictureBox1.Image = tB;
             g.Dispose();
-        }
-
+        
+    }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+
             exitCoords newExit = new exitCoords();
             if (int.TryParse(exitXInput.Text, out newExit.x) && int.TryParse(exitYInput.Text, out newExit.y))
             {
                 if (newExit.x >= 0 && newExit.x < cols && newExit.y >= 0 && newExit.y < rows)
                 {
-                    if(!newExit.Equals(entryCoords))
+                    if (!newExit.Equals(entryCoords))
                     {
                         if (!exitTable.Contains(newExit))
                         {
-                            
-                            exitTable.Add(newExit);
-                           
-                            exitList.Items.Add(newExit.x + ", " + newExit.y);
 
-                         
+                            exitTable.Add(newExit);
+
+                            exitList.Items.Add(newExit.x + ", " + newExit.y);
+                            exitCoordsJson.Add(newExit);
+
+
                             renderGates(storedMaze.Image);
 
-                            int newInputX;
-                            int newInputY;
-                            if (int.TryParse(startXInput.Text, out newInputX) && int.TryParse(startYInput.Text, out newInputY))
-                            {
-                                if (newInputX >= 0 && newInputX < cols && newInputY >= 0 && newInputY < rows)
+                            
+                            
+                                if (entryCoords.x >= 0 && entryCoords.x < cols && entryCoords.y >= 0 && entryCoords.y < rows)
                                 {
                                     buttonStart.Enabled = true;
                                 }
@@ -930,11 +942,7 @@ namespace LabiryntFrontend
                                     buttonStart.Enabled = false;
                                 }
 
-                            }
-                            else
-                            {
-                                buttonStart.Enabled = false;
-                            }
+                            
                         }
                         else
                         {
@@ -946,8 +954,8 @@ namespace LabiryntFrontend
                         MessageBox.Show("Współrzędne wyjścia nie mogą być takie same jak współrzędne wejścia", " Błąd dodawania wyjścia", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                   
-                   
+
+
                 }
 
             }
@@ -958,10 +966,11 @@ namespace LabiryntFrontend
         {
             ListViewItem selectedItem = exitList.SelectedItems[0];
             exitTable.RemoveAt(selectedItem.Index);
+            exitCoordsJson.RemoveAt(selectedItem.Index);
             exitList.Items.Remove(selectedItem);
             renderGates(storedMaze.Image);
 
-            if(exitList.Items.Count > 0)
+            if (exitList.Items.Count > 0)
             {
                 buttonStart.Enabled = true;
             }
@@ -982,7 +991,7 @@ namespace LabiryntFrontend
             using (SaveFileDialog saveDialog = new SaveFileDialog())
             {
                 saveDialog.Filter = "Pliki PNG (*.png)|*.png";
-                saveDialog.Title = "Zapisz obraz";
+                saveDialog.Title = "Zapisz labirynt jako zdjęcie";
                 saveDialog.CheckFileExists = false;
                 saveDialog.CheckPathExists = true;
 
@@ -994,7 +1003,7 @@ namespace LabiryntFrontend
 
 
                     SavePictureBoxAsPng(pictureBox1, fileProperties);
-                    MessageBox.Show("Obraz " + fileName + " został zapisany pomyślnie w lokacji: " + fileDirectory, " Zapisano", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Obraz " + fileName + " został pomyślnie zapisany w lokacji: " + fileDirectory, " Zapisano", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
             }
@@ -1037,18 +1046,19 @@ namespace LabiryntFrontend
 
         private void addEntryButton_Click(object sender, EventArgs e)
         {
-            
+
             exitCoords newEntries = new exitCoords();
             newEntries.x = int.Parse(startXInput.Text);
             newEntries.y = int.Parse(startYInput.Text);
 
             if (!exitTable.Contains(newEntries))
             {
-                renderGates(storedMaze.Image);
                 entryCoords = newEntries;
+                renderGates(storedMaze.Image);
+            
 
-                variablesList.Insert(1, entryCoords.x.ToString() + "," + entryCoords.y.ToString());
-               
+
+
                 if (exitList.Items.Count > 0)
                 {
                     buttonStart.Enabled = true;
@@ -1063,8 +1073,8 @@ namespace LabiryntFrontend
             {
                 MessageBox.Show("Współrzędne wejścia nie mogą być takie same jak współrzędne wyjścia!", " Błąd dodawania wejścia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
-                
+
+
         }
 
         private void startXInput_TextChanged(object sender, EventArgs e)
@@ -1093,23 +1103,39 @@ namespace LabiryntFrontend
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Plik .maze|*.maze";
-            saveFileDialog.Title = "Zapisz plik .json";
+            saveFileDialog.Title = "Zapisz plik .maze";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string filePath = saveFileDialog.FileName;
+                string fileProperties = saveFileDialog.FileName;
+                string fileName = Path.GetFileName(fileProperties);
+                string fileDirectory = Path.GetDirectoryName(fileProperties);
 
+
+
+                
                 try
                 {
-                    Dictionary<string, string> variables = new Dictionary<string, string>();
-                    variables.Add("var1", startXInput.Text);
-                    variables.Add("var2", startYInput.Text);
-                    // Dodaj więcej zmiennych do słownika
+                    var dataModel = new
+                    {
+                        seed = generatedSeed,
+                        rows = rows,
+                        cols = cols,
+                        startXY = new { startX = entryCoords.x, startY = entryCoords.y },
+                        exitCoords = exitCoordsJson.Select(e => new { x = e.x, y = e.y }).ToList()
+                    };
 
-                    string json = JsonSerializer.Serialize(variables);
+                    // Konfiguracja opcji serializacji
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true
+                    };
 
-                    File.WriteAllText(filePath, json);
+                    // Konwersja do formatu JSON
+                    string json = JsonSerializer.Serialize(dataModel, options);
 
-                    MessageBox.Show("Plik został zapisany.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    File.WriteAllText(fileProperties, json);
+
+                    MessageBox.Show("Labirynt " + fileName + " został pomyślnie zapisany w lokacji: " + fileDirectory, " Zapisano", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -1120,21 +1146,94 @@ namespace LabiryntFrontend
 
         private void openMazeAsFileButton_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Plik .maze|*.maze";
+            openFileDialog.Title = "Otwórz plik .maze";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
 
+                try
+                {
+                    string json = File.ReadAllText(filePath);
+
+                    // Deserializacja JSON do modelu danych
+                    JsonDocument document = JsonDocument.Parse(json);
+
+                  
+                    
+                    generatedSeed = document.RootElement.GetProperty("seed").GetInt32();
+                    rows = document.RootElement.GetProperty("rows").GetInt32();
+                    cols = document.RootElement.GetProperty("cols").GetInt32();
+                    entryCoords.x = document.RootElement.GetProperty("startXY").GetProperty("startX").GetInt32();
+                    entryCoords.y = document.RootElement.GetProperty("startXY").GetProperty("startY").GetInt32();
+                    GenerateMaze(cols, rows, generatedSeed);
+                    pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+                    storedMaze.Image = pictureBox1.Image;
+                    saveMazeAsPNG.Enabled = true;
+                    startXInput.Text = entryCoords.x.ToString();
+                    startYInput.Text = entryCoords.y.ToString();
+
+                    exitTable.Clear();
+                    exitCoordsJson.Clear();
+                    exitList.Items.Clear();
+
+                    JsonElement exitCoordsElement = document.RootElement.GetProperty("exitCoords");
+                    if (exitCoordsElement.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (JsonElement exitCoordElement in exitCoordsElement.EnumerateArray())
+                        {
+                            int x = exitCoordElement.GetProperty("x").GetInt32();
+                            int y = exitCoordElement.GetProperty("y").GetInt32();
+                         
+                           exitTable.Add(new exitCoords { x = x, y = y });
+                           exitCoordsJson.Add(new exitCoords { x = x, y = y });
+
+                           exitList.Items.Add(x + ", " + y);
+                        }
+                    }
+
+                    renderGates(storedMaze.Image);
+                    saveMazeAsFileButton.Enabled = true;
+                    startXInput.Text = "";
+                    exitXInput.Text = "";
+                    startXInput.Enabled = true;
+                    startYInput.Text = "";
+                    exitYInput.Text = "";
+                    startYInput.Enabled = true;
+                    exitXInput.Enabled = true;
+                    exitYInput.Enabled = true;
+
+                    button1.Enabled = false;
+                    addEntryButton.Enabled = false;
+
+
+                    if(!exitTable.Contains(null) && entryCoords.x != -1 && entryCoords.y != -1)
+                    {
+                        buttonStart.Enabled = true;
+                    }
+                 
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Wystąpił błąd podczas zapisywania pliku: " + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
-    }
 
-    public class cMazeState
-    {
-        public int x, y, dir;
-        public cMazeState(int tx, int ty, int td) { x = tx; y = ty; dir = td; }
-        public cMazeState(cMazeState s) { x = s.x; y = s.y; dir = s.dir; }
-    }
+        public class cMazeState
+        {
+            public int x, y, dir;
+            public cMazeState(int tx, int ty, int td) { x = tx; y = ty; dir = td; }
+            public cMazeState(cMazeState s) { x = s.x; y = s.y; dir = s.dir; }
+        }
 
-    public class cCellPosition
-    {
-        public int x, y;
-        public cCellPosition() { }
-        public cCellPosition(int xp, int yp) { x = xp; y = yp; }
+        public class cCellPosition
+        {
+            public int x, y;
+            public cCellPosition() { }
+            public cCellPosition(int xp, int yp) { x = xp; y = yp; }
+        }
     }
 }
