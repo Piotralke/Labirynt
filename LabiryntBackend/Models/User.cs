@@ -16,5 +16,15 @@ namespace LabiryntBackend.Models
             this.login = login;
             this.password = password;
         }
+        public User(User user)
+        {
+            this.id_user = user.id_user;
+            this.login = user.login;
+            this.password = user.password;
+        }
+        public User()
+        {
+ 
+        }
     }
 }

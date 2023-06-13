@@ -1,4 +1,5 @@
 using LabiryntBackend.Models;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace LabiryntFrontend
@@ -42,15 +43,14 @@ namespace LabiryntFrontend
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            List<string> credentials = new List<string>();
-            credentials.Add(loginInput.Text);
-            credentials.Add(passwordInput.Text);
-            string isValid = dataGetter.getContent("User/Login", credentials);
-            if (isValid == "true")
+     
+            User user = dataGetter.login(loginInput.Text, passwordInput.Text);
+            if (user != null)
             {
+                Debug.WriteLine(JsonSerializer.Serialize(user));
                 loginInput.Clear();
                 passwordInput.Clear();
-                GbMaze gbMaze = new GbMaze();
+                GbMaze gbMaze = new GbMaze(user.id_user);
                 this.Hide();
                 gbMaze.Show();
 

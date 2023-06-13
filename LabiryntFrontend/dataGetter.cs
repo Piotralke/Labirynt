@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LabiryntBackend.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -32,6 +33,16 @@ namespace LabiryntFrontend
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
             return content;
+        }
+        public User login(string login, string password)
+        {
+
+            String request = "http://localhost:5194/api/User/Login/" +login + "/" + password;
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(@request);
+            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+            string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+            User newUser = JsonSerializer.Deserialize<User>(content);
+            return newUser;
         }
 
     }

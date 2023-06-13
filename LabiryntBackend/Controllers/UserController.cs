@@ -30,7 +30,7 @@ namespace LabiryntBackend.Controllers
         }
 
         [HttpGet("Login/{login}/{password}")]
-        public bool Login(string login, string password)
+        public User Login(string login, string password)
         {
             var user = _context.Users.Where(u=>u.login.Equals(login)).FirstOrDefault();
             if (user != null)
@@ -39,11 +39,11 @@ namespace LabiryntBackend.Controllers
                 bool isPasswordValid = simpleHash.Verify(password, user.password);
                 if(isPasswordValid)
                 {
-                    return true;
+                    return user;
                 }
-                return false;
+                return null;
             }
-            return false;
+            return null;
         }
 
         [HttpPost]

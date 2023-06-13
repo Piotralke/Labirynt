@@ -45,10 +45,5 @@ namespace LabiryntBackend.Controllers
             _context.SaveChanges();
         }
 
-        [HttpPut("{id}")]
-        public void Put(long id, [FromBody] Maze maze)
-        {
-        }
-
     }
 }
