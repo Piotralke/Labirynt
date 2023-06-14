@@ -100,42 +100,6 @@ namespace LabiryntFrontend
 
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    maze_data[i, j] = 0;
-                }
-            }
-            pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    maze_data[i, j] = 3;
-                }
-            }
-            pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("UWAGA! Zmiana rozmiaru labiryntu spowoduje usunięcie wszystkich ścian, wejść oraz wyjść labiryntu!. Czy na pewno chcesz zmienić rozmiar?",
@@ -181,6 +145,8 @@ namespace LabiryntFrontend
 
                 button1.Enabled = false;
                 saveMazeAsPNG.Enabled = false;
+                saveMazeAsFileButton.Enabled = false;
+                button4.Enabled = false;
 
             }
         }
