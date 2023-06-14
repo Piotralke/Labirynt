@@ -1,6 +1,7 @@
 ﻿using LabiryntBackend.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -25,38 +26,46 @@ namespace LabiryntFrontend
             string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
             return content;
         }
-        public string getContent(string link)
+        public List<Maze> getUserMazes(long id_user)
         {
             
-            String request = "http://localhost:5194/api/" + link;
+            String request = "http://localhost:5194/api/Mazes/getUserMazes/" + id_user;
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(@request);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
-            return content;
+            Debug.WriteLine(content);
+            List<Maze> mazes = JsonSerializer.Deserialize<List<Maze>>(content);
+            return mazes;
         }
         public User login(string login, string password)
         {
-
-            String request = "http://localhost:5194/api/User/Login/" +login + "/" + password;
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(@request);
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
-            User newUser = JsonSerializer.Deserialize<User>(content);
-            return newUser;
+            try
+            {
+                String request = "http://localhost:5194/api/User/Login/" + login + "/" + password;
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(@request);
+                HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+                string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+                User newUser = JsonSerializer.Deserialize<User>(content);
+                return newUser;
+            }catch(Exception ex)
+            {
+                return null;
+            }
+           
         }
 
     }
     class dataSetter<T>
     {
         public dataSetter() { }
-        public async Task postContent(string link, T data)
+        public async Task<object> postContent(string link, T data)
         {
             
             String json = JsonSerializer.Serialize(data);
             using (var streamWriter = new HttpClient())
             {
                 var response = await streamWriter.PostAsync("http://localhost:5194/api/" +link, new StringContent(json, Encoding.UTF8, "application/json"));
-
+                if (response.StatusCode == HttpStatusCode.OK) { return response; } return null;
             }
         }
     }

@@ -69,6 +69,8 @@
             Controls.Add(textBox1);
             Controls.Add(button2);
             Controls.Add(button1);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "SaveToDB";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SaveToDB";

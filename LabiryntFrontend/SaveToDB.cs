@@ -20,7 +20,7 @@ namespace LabiryntFrontend
         exitCoords entryCoords;
         List<exitCoords> exitCoordsJson;
         long id_user;
-        public SaveToDB(int generatedSeed, uint rows, uint cols, exitCoords entryCoords, List<exitCoords> exitCoordsJson, long  id_user)
+        public SaveToDB(int generatedSeed, uint rows, uint cols, exitCoords entryCoords, List<exitCoords> exitCoordsJson, long id_user)
         {
             InitializeComponent();
             this.generatedSeed = generatedSeed;
@@ -34,7 +34,7 @@ namespace LabiryntFrontend
         private async void button1_Click(object sender, EventArgs e)
         {
             string stringStartXY = entryCoords.x + "," + entryCoords.y;
-            string stringExitCoords = string.Join(";", exitCoordsJson.Select(e => e.x + "," + e.y)) + ";";
+            string stringExitCoords = string.Join(";", exitCoordsJson.Select(e => e.x + "," + e.y));
 
             Maze maze = new Maze()
             {
@@ -52,11 +52,11 @@ namespace LabiryntFrontend
 
             setter.postContent("Mazes", maze);
 
-            
-            string message = "Dodano labirynt " + textBox1.Text;
+
+            string message = "Dodano labirynt do bazy danych! " + textBox1.Text;
             string title = "Sukces!";
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            this.Close();
 
         }
 

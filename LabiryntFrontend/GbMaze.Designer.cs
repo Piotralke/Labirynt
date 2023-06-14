@@ -391,6 +391,7 @@
             backButton.Size = new Size(43, 41);
             backButton.TabIndex = 2;
             backButton.UseVisualStyleBackColor = true;
+            backButton.Click += backButton_Click;
             // 
             // panel3
             // 
@@ -556,6 +557,7 @@
             BackColor = Color.DarkSlateGray;
             ClientSize = new Size(1264, 681);
             Controls.Add(mainPanel);
+            MaximizeBox = false;
             Name = "GbMaze";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GbMaze";

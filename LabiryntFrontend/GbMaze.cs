@@ -16,8 +16,9 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.AxHost;
 using System.Text.Json;
-
+using System.Text.Json.Serialization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace LabiryntFrontend
 {
@@ -71,6 +72,7 @@ namespace LabiryntFrontend
             addEntryButton.Enabled = false;
             saveMazeAsPNG.Enabled = false;
             saveMazeAsFileButton.Enabled = false;
+            button4.Enabled = false;
             this.userId = userId;
             panelList.Add(panelEditor);
             panelList.Add(algorithmsPanel);
@@ -361,6 +363,7 @@ namespace LabiryntFrontend
                 pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
                 storedMaze.Image = pictureBox1.Image;
                 saveMazeAsPNG.Enabled = true;
+                button4.Enabled = true;
             }
             else
             {
@@ -372,6 +375,7 @@ namespace LabiryntFrontend
             exitCoordsJson.Clear();
             entryCoords.x = -1;
             entryCoords.y = -1;
+            exitCoordsJson.Add(entryCoords);
             exitTable.Clear();
             startXInput.Text = "";
             startYInput.Text = "";
@@ -1182,7 +1186,63 @@ namespace LabiryntFrontend
                 }
             }
         }
+        private void loadMaze(string json)
+        {
+            // Deserializacja JSON do modelu danych
+            JsonDocument document = JsonDocument.Parse(json);
+            generatedSeed = document.RootElement.GetProperty("seed").GetInt32();
+            rows = document.RootElement.GetProperty("rows").GetInt32();
+            cols = document.RootElement.GetProperty("cols").GetInt32();
+            entryCoords.x = document.RootElement.GetProperty("startXY").GetProperty("startX").GetInt32();
+            entryCoords.y = document.RootElement.GetProperty("startXY").GetProperty("startY").GetInt32();
+            GenerateMaze(cols, rows, generatedSeed);
+            pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
+            storedMaze.Image = pictureBox1.Image;
+            saveMazeAsPNG.Enabled = true;
+            startXInput.Text = entryCoords.x.ToString();
+            startYInput.Text = entryCoords.y.ToString();
 
+            exitTable.Clear();
+            exitCoordsJson.Clear();
+            exitList.Items.Clear();
+
+            JsonElement exitCoordsElement = document.RootElement.GetProperty("exitCoords");
+            if (exitCoordsElement.ValueKind == JsonValueKind.Array)
+            {
+                foreach (JsonElement exitCoordElement in exitCoordsElement.EnumerateArray())
+                {
+                    int x = exitCoordElement.GetProperty("x").GetInt32();
+                    int y = exitCoordElement.GetProperty("y").GetInt32();
+
+                    exitTable.Add(new exitCoords { x = x, y = y });
+                    exitCoordsJson.Add(new exitCoords { x = x, y = y });
+
+                    exitList.Items.Add(x + ", " + y);
+                }
+            }
+
+            renderGates(storedMaze.Image);
+            saveMazeAsFileButton.Enabled = true;
+            button4.Enabled = true;
+            startXInput.Text = "";
+            exitXInput.Text = "";
+            startXInput.Enabled = true;
+            startYInput.Text = "";
+            exitYInput.Text = "";
+            startYInput.Enabled = true;
+            exitXInput.Enabled = true;
+            exitYInput.Enabled = true;
+
+            button1.Enabled = false;
+            addEntryButton.Enabled = false;
+            buttonStart.Enabled = false;
+
+            if (exitTable.Count!=0 && entryCoords.x != -1 && entryCoords.y != -1)
+            {
+                buttonStart.Enabled = true;
+            }
+
+        }
         private void openMazeAsFileButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -1191,67 +1251,13 @@ namespace LabiryntFrontend
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = openFileDialog.FileName;
+                string fileName = Path.GetFileName(filePath);
 
                 try
                 {
                     string json = File.ReadAllText(filePath);
-
-                    // Deserializacja JSON do modelu danych
-                    JsonDocument document = JsonDocument.Parse(json);
-
-
-
-                    generatedSeed = document.RootElement.GetProperty("seed").GetInt32();
-                    rows = document.RootElement.GetProperty("rows").GetInt32();
-                    cols = document.RootElement.GetProperty("cols").GetInt32();
-                    entryCoords.x = document.RootElement.GetProperty("startXY").GetProperty("startX").GetInt32();
-                    entryCoords.y = document.RootElement.GetProperty("startXY").GetProperty("startY").GetInt32();
-                    GenerateMaze(cols, rows, generatedSeed);
-                    pictureBox1.Image = GetBitmap(cols * cellSize, rows * cellSize);
-                    storedMaze.Image = pictureBox1.Image;
-                    saveMazeAsPNG.Enabled = true;
-                    startXInput.Text = entryCoords.x.ToString();
-                    startYInput.Text = entryCoords.y.ToString();
-
-                    exitTable.Clear();
-                    exitCoordsJson.Clear();
-                    exitList.Items.Clear();
-
-                    JsonElement exitCoordsElement = document.RootElement.GetProperty("exitCoords");
-                    if (exitCoordsElement.ValueKind == JsonValueKind.Array)
-                    {
-                        foreach (JsonElement exitCoordElement in exitCoordsElement.EnumerateArray())
-                        {
-                            int x = exitCoordElement.GetProperty("x").GetInt32();
-                            int y = exitCoordElement.GetProperty("y").GetInt32();
-
-                            exitTable.Add(new exitCoords { x = x, y = y });
-                            exitCoordsJson.Add(new exitCoords { x = x, y = y });
-
-                            exitList.Items.Add(x + ", " + y);
-                        }
-                    }
-
-                    renderGates(storedMaze.Image);
-                    saveMazeAsFileButton.Enabled = true;
-                    startXInput.Text = "";
-                    exitXInput.Text = "";
-                    startXInput.Enabled = true;
-                    startYInput.Text = "";
-                    exitYInput.Text = "";
-                    startYInput.Enabled = true;
-                    exitXInput.Enabled = true;
-                    exitYInput.Enabled = true;
-
-                    button1.Enabled = false;
-                    addEntryButton.Enabled = false;
-
-
-                    if (!exitTable.Contains(null) && entryCoords.x != -1 && entryCoords.y != -1)
-                    {
-                        buttonStart.Enabled = true;
-                    }
-
+                    loadMaze(json);
+                    MessageBox.Show("Labirynt " + fileName + " został pomyślnie załadowany z pliku: ", " Wczytano", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
                 catch (Exception ex)
@@ -1289,7 +1295,63 @@ namespace LabiryntFrontend
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            //LOAD FROM DB
+            ReadFromDb fromDB = new ReadFromDb(userId);
+            var result = fromDB.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                Maze maze = fromDB.getItem();
+                string json = ConvertStringToJson(maze);
+                loadMaze(json);
+                MessageBox.Show("Labirynt " + maze.name + " został pomyślnie załadowany z bazy danych: ", " Wczytano", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+
+
+        }
+        public static string ConvertStringToJson(Maze inputMaze)
+        {
+
+
+            exitCoords startXY = new exitCoords();
+            string[] startCoords = inputMaze.startXY.Split(',');
+            startXY.x = int.Parse(startCoords[0]);
+            startXY.y = int.Parse(startCoords[1]);
+
+            string[] exitCoords = inputMaze.exitCoords.Split(';');
+            List<exitCoords> exitArray = new List<exitCoords>();
+            string[] check = exitCoords[0].Split(',');
+            if (check[0] != "-1")
+            {
+                for (int i = 0; i < exitCoords.Length; i++)
+                {
+                    string[] coords = exitCoords[i].Split(',');
+                    exitCoords exitCoord = new exitCoords();
+                    exitCoord.x = int.Parse(coords[0]);
+                    exitCoord.y = int.Parse(coords[1]);
+                    exitArray.Add(exitCoord);
+                }
+            }
+
+
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            var dataModel = new
+            {
+                seed = inputMaze.seed,
+                rows = inputMaze.rows,
+                cols = inputMaze.cols,
+                startXY = new { startX = startXY.x, startY = startXY.y },
+                exitCoords = exitArray.Select(e => new { x = e.x, y = e.y }).ToList()
+            };
+
+            string json = JsonSerializer.Serialize(dataModel, options);
+
+            return json;
         }
     }
 }

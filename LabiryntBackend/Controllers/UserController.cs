@@ -47,12 +47,19 @@ namespace LabiryntBackend.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] User user)
+        public User Post([FromBody] User user)
         {
-            ISimpleHash simpleHash = new SimpleHash();
-            user.password = simpleHash.Compute(user.password);
-            _context.Add(user);
-            _context.SaveChanges();
+            var exists = _context.Users.Where(u=>u.login.Equals(user.login)).FirstOrDefault();
+            if(exists == null)
+            {
+                ISimpleHash simpleHash = new SimpleHash();
+                user.password = simpleHash.Compute(user.password);
+                _context.Add(user);
+                _context.SaveChanges();
+                return user;
+            }
+            return null;
+            
         }
 
         [HttpPut("{id}")]

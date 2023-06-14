@@ -31,14 +31,23 @@ namespace LabiryntFrontend
             panelList[1].BringToFront();
         }
 
-        private void registerButton_Click(object sender, EventArgs e)
+        private async void registerButton_Click(object sender, EventArgs e)
         {
             dataSetter<User> dataSetter = new dataSetter<User>();
             User user = new User(loginRegisterInput.Text, passwordRegisterInput.Text);
-            var result = dataSetter.postContent("User", user);
-            loginRegisterInput.Clear();
-            passwordRegisterInput.Clear();
-            passwordConfirmInput.Clear();
+            var result = await dataSetter.postContent("User", user);
+            if (result != null)
+            {
+                loginRegisterInput.Clear();
+                passwordRegisterInput.Clear();
+                passwordConfirmInput.Clear();
+                MessageBox.Show("Pomyœlnie zarejestrowano!");
+            }
+            else
+            {
+                MessageBox.Show("Istnieje ju¿ u¿ytkownik o podanym loginie", "B³¹d rejestracji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -54,6 +63,10 @@ namespace LabiryntFrontend
                 this.Hide();
                 gbMaze.Show();
 
+            }
+            else
+            {
+                MessageBox.Show("B³êdne dane logowania", "B³¹d logowania",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
 
         }
