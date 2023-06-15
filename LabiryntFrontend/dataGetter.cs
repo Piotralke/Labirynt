@@ -28,14 +28,21 @@ namespace LabiryntFrontend
         }
         public List<Maze> getUserMazes(long id_user)
         {
+            try
+            {
+                String request = "http://localhost:5194/api/Mazes/getUserMazes/" + id_user;
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(@request);
+                HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+                string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+                Debug.WriteLine(content);
+                List<Maze> mazes = JsonSerializer.Deserialize<List<Maze>>(content);
+                return mazes;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
             
-            String request = "http://localhost:5194/api/Mazes/getUserMazes/" + id_user;
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(@request);
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            string content = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
-            Debug.WriteLine(content);
-            List<Maze> mazes = JsonSerializer.Deserialize<List<Maze>>(content);
-            return mazes;
         }
         public User login(string login, string password)
         {

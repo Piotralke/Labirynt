@@ -26,14 +26,23 @@ namespace LabiryntFrontend
             listView1.Columns.Add("Nazwa labiryntu", 200);
             this.id_user = id_user;
             mazes = getter.getUserMazes(id_user);
-
-            foreach (var maze in mazes)
+            if(mazes!=null)
             {
-                Lp++;
-                ListViewItem item = new ListViewItem(Lp.ToString());
-                item.SubItems.Add(maze.name);
-                listView1.Items.Add(item);
+                foreach (var maze in mazes)
+                {
+                    Lp++;
+                    ListViewItem item = new ListViewItem(Lp.ToString());
+                    item.SubItems.Add(maze.name);
+                    listView1.Items.Add(item);
+                }
             }
+            else
+            {
+                MessageBox.Show("Użytkownik nie posiada labiryntów!", "Brak labiryntów", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+            
 
         }
 
