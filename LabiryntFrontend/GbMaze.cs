@@ -86,6 +86,36 @@ namespace LabiryntFrontend
             pictureBox1.Image = tB;
             g.Dispose();
         }
+        public GbMaze()
+        {
+            InitializeComponent();
+            visualizationDelay = trackBar1.Value * 10;
+            exitList.Columns.Add("Współrzędne wyjść", 130);
+            button3.Enabled = false;
+            button6.Enabled = false;
+            isRandom.Checked = false;
+            buttonStart.Enabled = false;
+            startXInput.Enabled = false;
+            startYInput.Enabled = false;
+            exitXInput.Enabled = false;
+            exitYInput.Enabled = false;
+            button1.Enabled = false;
+            addEntryButton.Enabled = false;
+            saveMazeAsPNG.Enabled = false;
+            saveMazeAsFileButton.Enabled = false;
+            button4.Enabled = false;
+            panelList.Add(panelEditor);
+            panelList.Add(algorithmsPanel);
+            panelList.Add(stepWorkPanel);
+            this.Controls.Add(storedMaze);
+            Bitmap tB = new Bitmap(cols * cellSize + 1, rows * cellSize + 1);
+            Graphics g = Graphics.FromImage((Image)tB);
+
+            Brush w = Brushes.LightGray;
+            g.FillRectangle(w, 0, 0, tB.Width - 1, tB.Height - 1);
+            pictureBox1.Image = tB;
+            g.Dispose();
+        }
         private void buttonEditor_Click(object sender, EventArgs e)
         {
 
@@ -935,6 +965,10 @@ namespace LabiryntFrontend
                             exitTable.Add(newExit);
 
                             exitList.Items.Add(newExit.x + ", " + newExit.y);
+                            if (exitCoordsJson.Exists(e => e.x == -1 && e.y == -1))
+                            {
+                                exitCoordsJson.Clear();
+                            }
                             exitCoordsJson.Add(newExit);
 
 
@@ -985,6 +1019,8 @@ namespace LabiryntFrontend
             }
             else
             {
+
+                exitCoordsJson.Add(new exitCoords { x = -1, y = -1 });
                 buttonStart.Enabled = false;
             }
         }
@@ -1121,7 +1157,6 @@ namespace LabiryntFrontend
 
 
 
-
                 try
                 {
                     var dataModel = new
@@ -1180,10 +1215,13 @@ namespace LabiryntFrontend
                     int x = exitCoordElement.GetProperty("x").GetInt32();
                     int y = exitCoordElement.GetProperty("y").GetInt32();
 
+                    
                     exitTable.Add(new exitCoords { x = x, y = y });
                     exitCoordsJson.Add(new exitCoords { x = x, y = y });
-
-                    exitList.Items.Add(x + ", " + y);
+                    if (x != -1 && y != -1)
+                    {
+                        exitList.Items.Add(x + ", " + y);
+                    }
                 }
             }
 
